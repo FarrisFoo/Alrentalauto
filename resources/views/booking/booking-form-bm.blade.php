@@ -73,7 +73,7 @@
 										<form class="row g-3" id="cust-booking-form" enctype="multipart/form-data">
 											<div class="col-12">
 												<label for="renter_name" class="form-label">Nama</label>
-												<input type="text" class="form-control" id="renter_name" name="renter_name" placeholder="Jhon">
+												<input type="text" class="form-control" id="renter_name" name="renter_name">
 											</div>
 
                                             <label for="renter_name" class="form-label">Kad Pengenalan</label>
@@ -405,6 +405,8 @@
                     deliveryCharge = 30;
                 }else if (selected_area == 5) {
                     deliveryCharge = 50;
+                }else if (selected_area == 6) {
+                    deliveryCharge = 60;
                 }
 
                 if (selected_area == 1) {
@@ -417,6 +419,8 @@
                     area_name = 'Larkin';
                 }else if (selected_area == 5) {
                     area_name = 'Outside Johor Bahru';
+                }else if (selected_area == 6) {
+                    area_name = 'Senai Airport';
                 }
 
                 $('.delivery-area').html(area_name);
@@ -523,8 +527,8 @@
             if ($('input[name="tnc-check"]').val() != '1') {
                 Swal.fire({
                     icon: 'question', 
-                    title: 'Disagree with us?', 
-                    text: 'Please read and confirm our Term and Condition before making a booking.',
+                    title: 'Tidak bersetuju dengan kami?', 
+                    text: 'Sila baca dan bersetuju dengan Terms & Conditions kami sebelum membuat tempahan.',
                 });
             } else {
                 $.ajax({
@@ -546,6 +550,8 @@
                             for (var errorInput in data.error) {
                                 if (!focusFirst) {
                                     $('input[name="' + errorInput + '"]').focus();
+                                    $('textarea[name="' + errorInput + '"]').focus();
+                                    $('select[name="' + errorInput + '"]').focus();
                                 }
                                 focusFirst = true;
     
@@ -555,15 +561,20 @@
                                 // -- Append error message in the parent element and style the input.
                                 $('input[name="' + errorInput + '"]').addClass('cbwus-error-input');
                                 $('input[name="' + errorInput + '"]').parent().append(inputError.replace('replaceErrorHere', data.error[errorInput]));
-    
+
+                                // -- Append error message in the parent element and style the textarea.
+                                $('textarea[name="' + errorInput + '"]').addClass('cbwus-error-input');
+                                $('textarea[name="' + errorInput + '"]').parent().append(inputError.replace('replaceErrorHere', data.error[errorInput]));
+                                
+                                // -- Append error message in the parent element and style the select.
                                 $('select[name="' + errorInput + '"]').addClass('cbwus-error-input');
                                 $('select[name="' + errorInput + '"]').parent().append(inputError.replace('replaceErrorHere', data.error[errorInput]));
                             }
                         } else {
                             Swal.fire({
                                 icon: 'success', 
-                                title: 'Thank you!', 
-                                text: 'You will be redirect to payment page.',
+                                title: 'Terima kasih!', 
+                                text: 'Anda akan diarahkan ke page pembayaran.',
                             }).then(function() {
                                 window.location.href = "{{ route('booking.payment-bm') }}";
                             });
@@ -572,8 +583,8 @@
                     error: function () {
                         Swal.fire({
                             icon: 'warning', 
-                            title: 'Something went wrong!', 
-                            text: 'Please try again later or contact the administator.',
+                            title: 'Ada Masalah!', 
+                            text: 'Sila cuba lagi ataupun hubungi admin kami.',
                         });
                     }
                 });

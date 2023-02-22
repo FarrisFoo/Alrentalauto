@@ -60,7 +60,7 @@
                         <div class="card booking-card">
                             <div class="card-body">
 								<div class="border p-4 rounded">
-                                    <div class="text-center" style="padding-top: 20px; padding-bottom: 20px;">
+                                    <div class="text-center" style="padding-top: 20px; ">
                                         <h3 class="">Booking Payment</h3>
                                         <p>Please complete your payment for us to confirm your booking.</p>
                                     </div>
@@ -68,12 +68,54 @@
                                     <div class="col-12 text-center">
                                         <span style="font-weight:600;">Please make sure any information and the payment made are TRUE, any faulty and misinformation will not be consider and might be blacklist and report.</span>
                                     </div>
+
+                                    <div class="col-12 mt-4">
+                                        <table class="w-100" style="border: 1px solid">
+                                            <tr style="border: 1px solid">
+                                                <th class="col-mb-3"></th>
+                                                <th class="col-3">Info</th>
+                                                <th class="col-3">Price</th>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-4">Deposit</td>
+                                                <td class="col-4"></td>
+                                                <td class="col-4">RM100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-4">Car</td>
+                                                <td class="col-4">{{ $carModel }} | RM{{ $carPrice }}</td>
+                                                <td class="col-4">RM{{ $totalRent }}</td>
+                                            </tr>
+                                            <tr class="col-4">
+                                                <td class="col-4">Duration</td>
+                                                <td class="col-4">{{ $bookingDuration }} Days</td>
+                                                <td class="col-4"></td>
+                                            </tr>
+                                            @if ($bookingData->pickup_method != 0)
+                                            <tr class="col-4">
+                                                <td class="col-4">Delivery Charge</td>
+                                                <td class="col-4">{{ $pickupPlace }}</td>
+                                                <td class="col-4">RM{{ $deliveryCharge }}</td>
+                                            </tr>
+                                            @endif
+                                            <tr class="col-4">
+                                                <td class="col-4">&nbsp;</td>
+                                                <th class="col-4">&nbsp;</th>
+                                                <td class="col-4">&nbsp;</td>
+                                            </tr>
+                                            <tr class="col-4">
+                                                <td class="col-4"></td>
+                                                <th class="col-4">Total</th>
+                                                <td class="col-4" style="font-weight:600;font-size:20px;">RM{{ $overallTotal }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                         
 									<div class="login-separater text-center mb-4"> <span>SELECT PAYMENT METHOD</span>
 										<hr/>
 									</div>
 									<div class="form-body">
-										<form class="row g-3" id="cust-booking-form" enctype="multipart/form-data">
+										<form class="row g-3" id="receipt-form" enctype="multipart/form-data">
                                             
                                             <div class="col-12">
                                                 <label for="payment_method" class="form-label">Payment Method</label>
@@ -94,8 +136,10 @@
                                                 <h5 class="text-center mb-0" style="font-weight:600;">Maybank</h5>
                                                 <br>
                                                 <p class="text-center mb-0"> and upload the <span style="font-weight:600;">receipt</span></p>
-										        <form class="row g-3" id="receipt-form" enctype="multipart/form-data">
+										        
+                                                <form class="row g-3" id="receipt-form" enctype="multipart/form-data">
                                                     <p class="mb-0">Upload Receipt</p>
+                                                    <input type="hidden" name="booking_id" value="{{ $bookingData->id }}">
                                                     <div class="input-group control-group mt-0">
                                                         <input type="file" name="payment_receipt" class="form-control">
                                                     </div>
@@ -106,6 +150,7 @@
                                                         </div>
                                                     </div>
                                                 </form>
+
                                                 <h6 class="text-center mb-4 mt-4">OR</h6>
                                                 <p>Please send the <span style="font-weight:600;">Transfer Receipt</span> to one of our admin on Whatsapp and wait for the confirmation from them before click on <span style="font-weight:600;">Complete Booking</span>.</p>
                                                 <a href="https://wa.link/wjmk2a" target="_blank" style="font-weight:600;">Al Hazril&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+60 14-515 6050</a>
@@ -186,17 +231,17 @@
             }
         });
 
-        $(document).on('submit', '#cust-booking-form', function (e) {
+        $(document).on('submit', '#receipt-form', function (e) {
             e.preventDefault();
             // showLoading();
             
             var formData = new FormData();
-            
+            formData.append('id', $('input[name="booking_id"]').val());
             formData.append('payment_receipt', $('input[name="payment_receipt"]')[0].files[0]);
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route("booking.post") }}',
+                url: '{{ route("booking.receipt") }}',
                 data: formData,
                 processData: false,
                 contentType: false,

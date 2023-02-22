@@ -73,7 +73,7 @@
 										<form class="row g-3" id="cust-booking-form" enctype="multipart/form-data">
 											<div class="col-12">
 												<label for="renter_name" class="form-label">Name</label>
-												<input type="text" class="form-control" id="renter_name" name="renter_name" placeholder="Jhon">
+												<input type="text" class="form-control" id="renter_name" name="renter_name">
 											</div>
 
                                             <label for="renter_name" class="form-label">Identity Card</label>
@@ -154,6 +154,7 @@
                                                     <option value="2">RM20 | Permas</option>
                                                     <option value="3">RM30 | Johor Bahru</option>
                                                     <option value="4">RM30 | Larkin</option>
+                                                    <option value="6">RM60 | Senai Airport</option>
                                                     <option value="5">RM50 | Outside of Johor Bahru (exp: Gelang Patah, Iskandar, Senai)</option>
                                                 </select>
                                             </div>
@@ -230,7 +231,7 @@
                                             <div class="input-group control-group mt-0">
                                                 <input type="file" name="renter_ic" class="form-control">
                                             </div>
-                                            <p class="mb-0">Back (leave it blank if unnecessary)</p>
+                                            <p class="mb-0">Back</p>
                                             <div class="input-group control-group mt-0 mb-4">
                                                 <input type="file" name="renter_ic_back" class="form-control">
                                             </div>
@@ -240,7 +241,7 @@
                                             <div class="input-group mt-0 control-group">
                                                 <input type="file" name="rental_license" class="form-control">
                                             </div>
-                                            <p class="mb-0">Back (leave it blank if unnecessary)</p>
+                                            <p class="mb-0">Back</p>
                                             <div class="input-group mt-0 control-group mb-4">
                                                 <input type="file" name="rental_license_back" class="form-control">
                                             </div>
@@ -404,6 +405,8 @@
                     deliveryCharge = 30;
                 }else if (selected_area == 5) {
                     deliveryCharge = 50;
+                }else if (selected_area == 6) {
+                    deliveryCharge = 60;
                 }
 
                 if (selected_area == 1) {
@@ -545,6 +548,8 @@
                             for (var errorInput in data.error) {
                                 if (!focusFirst) {
                                     $('input[name="' + errorInput + '"]').focus();
+                                    $('textarea[name="' + errorInput + '"]').focus();
+                                    $('select[name="' + errorInput + '"]').focus();
                                 }
                                 focusFirst = true;
     
@@ -554,7 +559,12 @@
                                 // -- Append error message in the parent element and style the input.
                                 $('input[name="' + errorInput + '"]').addClass('cbwus-error-input');
                                 $('input[name="' + errorInput + '"]').parent().append(inputError.replace('replaceErrorHere', data.error[errorInput]));
-    
+
+                                // -- Append error message in the parent element and style the textarea.
+                                $('textarea[name="' + errorInput + '"]').addClass('cbwus-error-input');
+                                $('textarea[name="' + errorInput + '"]').parent().append(inputError.replace('replaceErrorHere', data.error[errorInput]));
+                                
+                                // -- Append error message in the parent element and style the select.
                                 $('select[name="' + errorInput + '"]').addClass('cbwus-error-input');
                                 $('select[name="' + errorInput + '"]').parent().append(inputError.replace('replaceErrorHere', data.error[errorInput]));
                             }

@@ -26,6 +26,9 @@ class BookingController extends Controller
     public $bookingSelfieFilePath;
     public $bookingSelfieStorageFilePath;
 
+    public $bookingReceiptFilePath;
+    public $bookingReceiptStorageFilePath;
+
     public function __construct()
     {
         $this->bookingLicenseFilePath = 'public/uploads/booking/license/';
@@ -36,6 +39,9 @@ class BookingController extends Controller
 
         $this->bookingSelfieFilePath = 'public/uploads/booking/selfie/';
         $this->bookingSelfieStorageFilePath = 'storage/uploads/booking/selfie/';
+
+        $this->bookingReceiptFilePath = 'public/uploads/booking/receipt/';
+        $this->bookingReceiptStorageFilePath = 'storage/uploads/booking/receipt/';
 
     }
 
@@ -125,7 +131,7 @@ class BookingController extends Controller
 
         if ($request->file('renter_ic')) {
             $icFile = $request->file('renter_ic');
-            $icFilename = $createNewCustomer->id . '_ic_' . $icFile->getClientOriginalName();
+            $icFilename = $createNewCustomer->id . '_ic_' . $formatted_ic . '.' . $icFile->getClientOriginalExtension();
 
             storage::put($this->bookingIcFilePath . $icFilename, file_get_contents($icFile));
 
@@ -135,7 +141,7 @@ class BookingController extends Controller
 
         if ($request->file('renter_ic_back')) {
             $icFile_back = $request->file('renter_ic_back');
-            $icFilename_back = $createNewCustomer->id . '_ic_' . $icFile_back->getClientOriginalName();
+            $icFilename_back = $createNewCustomer->id . '_ic-back_' . '.' . $icFile_back->getClientOriginalExtension();
 
             storage::put($this->bookingIcFilePath . $icFilename_back, file_get_contents($icFile_back));
 
@@ -145,7 +151,7 @@ class BookingController extends Controller
         
         if ($request->file('rental_license')) {
             $licenseFile = $request->file('rental_license');
-            $licenseFilename = $createNewCustomer->id . '_license_' . $licenseFile->getClientOriginalName();
+            $licenseFilename = $createNewCustomer->id . '_license_' . '.' . $licenseFile->getClientOriginalExtension();
 
             storage::put($this->bookingLicenseFilePath . $licenseFilename, file_get_contents($licenseFile));
 
@@ -155,7 +161,7 @@ class BookingController extends Controller
 
         if ($request->file('rental_license_back')) {
             $licenseFile_back = $request->file('rental_license_back');
-            $licenseFilename_back = $createNewCustomer->id . '_license_' . $licenseFile_back->getClientOriginalName();
+            $licenseFilename_back = $createNewCustomer->id . '_license-back_' . '.' . $licenseFile_back->getClientOriginalExtension();
 
             storage::put($this->bookingLicenseFilePath . $licenseFilename_back, file_get_contents($licenseFile_back));
 
@@ -165,7 +171,7 @@ class BookingController extends Controller
 
         if ($request->file('renter_selfie')) {
             $selfieFile = $request->file('renter_selfie');
-            $selfieFilename = $createNewCustomer->id . '_selfie_' . $selfieFile->getClientOriginalName();
+            $selfieFilename = $createNewCustomer->id . '_selfie_' . '.' . $selfieFile->getClientOriginalExtension();
 
             storage::put($this->bookingSelfieFilePath . $selfieFilename, file_get_contents($selfieFile));
 
@@ -208,17 +214,146 @@ class BookingController extends Controller
 
     public function payment()
     {   
-        return view('booking.booking-payment');
+        $bookingData = Booking::with(['car', 'customer'])->latest()->first();
+        
+        $carPrice = $bookingData->car->price;
+        $carModel = $bookingData->car->model;
+
+        //get total booking day
+        $pickupDate = $bookingData->pickup_date;
+        $returnDate = $bookingData->return_date;
+        $pickupDateArr = explode('-', trim($pickupDate));
+        $returnDateArr = explode('-', trim($returnDate));
+        $getPickupDate = Carbon::createFromDate($pickupDateArr[0], $pickupDateArr[1], $pickupDateArr[2]);
+        $getReturnDate = Carbon::createFromDate($returnDateArr[0], $returnDateArr[1], $returnDateArr[2]);
+
+        $bookingDuration = $getPickupDate->diffInDays($getReturnDate);
+        
+        $totalRent = $carPrice * $bookingDuration;
+
+        if ($bookingData->pickup_area == 1) {
+            $deliveryCharge = 15;
+        }else if ($bookingData->pickup_area == 2) {
+            $deliveryCharge = 20;
+        }else if ($bookingData->pickup_area == 3) {
+            $deliveryCharge = 30;
+        }else if ($bookingData->pickup_area == 4) {
+            $deliveryCharge = 30;
+        }else if ($bookingData->pickup_area == 5) {
+            $deliveryCharge = 50;
+        }else if ($bookingData->pickup_area == 6) {
+            $deliveryCharge = 60;
+        }else {
+            $deliveryCharge = 0;
+        }
+
+        if ($bookingData->pickup_area == 1) {
+            $pickupPlace = 'Pasir Gudang';
+        } else if ($bookingData->pickup_area == 2) {
+            $pickupPlace = 'Permas';
+        } else if ($bookingData->pickup_area == 3) {
+            $pickupPlace = 'Johor Bahru';
+        } else if ($bookingData->pickup_area == 4) {
+            $pickupPlace = 'Larkin';
+        } else if ($bookingData->pickup_area == 5) {
+            $pickupPlace = $bookingData->area_outside_jb;
+        }else if ($bookingData->pickup_area == 6) {
+            $pickupPlace = 'Senai Airport';
+        }else {
+            $pickupPlace = '';
+        }
+
+        $overallTotal = ($carPrice * $bookingDuration) + $deliveryCharge + 100; 
+
+        // dd($totalRent);
+
+        return view('booking.booking-payment', compact('bookingData', 'carPrice', 'carModel', 'bookingDuration', 'totalRent', 'deliveryCharge', 'overallTotal', 'pickupPlace'));
     }
 
     public function paymentBm()
     {   
-        return view('booking.booking-payment-bm');
+        $bookingData = Booking::with(['car', 'customer'])->latest()->first();
+        
+        $carPrice = $bookingData->car->price;
+        $carModel = $bookingData->car->model;
+
+        //get total booking day
+        $pickupDate = $bookingData->pickup_date;
+        $returnDate = $bookingData->return_date;
+        $pickupDateArr = explode('-', trim($pickupDate));
+        $returnDateArr = explode('-', trim($returnDate));
+        $getPickupDate = Carbon::createFromDate($pickupDateArr[0], $pickupDateArr[1], $pickupDateArr[2]);
+        $getReturnDate = Carbon::createFromDate($returnDateArr[0], $returnDateArr[1], $returnDateArr[2]);
+
+        $bookingDuration = $getPickupDate->diffInDays($getReturnDate);
+        
+        $totalRent = $carPrice * $bookingDuration;
+
+        if ($bookingData->pickup_area == 1) {
+            $deliveryCharge = 15;
+        }else if ($bookingData->pickup_area == 2) {
+            $deliveryCharge = 20;
+        }else if ($bookingData->pickup_area == 3) {
+            $deliveryCharge = 30;
+        }else if ($bookingData->pickup_area == 4) {
+            $deliveryCharge = 30;
+        }else if ($bookingData->pickup_area == 5) {
+            $deliveryCharge = 50;
+        }else if ($bookingData->pickup_area == 6) {
+            $deliveryCharge = 60;
+        }else {
+            $deliveryCharge = 0;
+        }
+
+        if ($bookingData->pickup_area == 1) {
+            $pickupPlace = 'Pasir Gudang';
+        } else if ($bookingData->pickup_area == 2) {
+            $pickupPlace = 'Permas';
+        } else if ($bookingData->pickup_area == 3) {
+            $pickupPlace = 'Johor Bahru';
+        } else if ($bookingData->pickup_area == 4) {
+            $pickupPlace = 'Larkin';
+        } else if ($bookingData->pickup_area == 5) {
+            $pickupPlace = $bookingData->area_outside_jb;
+        }else if ($bookingData->pickup_area == 6) {
+            $pickupPlace = 'Senai Airport';
+        }else {
+            $pickupPlace = '';
+        }
+
+        $overallTotal = ($carPrice * $bookingDuration) + $deliveryCharge + 100; 
+
+        // dd($totalRent);
+
+        return view('booking.booking-payment-bm', compact('bookingData', 'carPrice', 'carModel', 'bookingDuration', 'totalRent', 'deliveryCharge', 'overallTotal', 'pickupPlace'));
     }
 
-    public function receipt()
-    {
-        
+    public function receipt(Request $request)
+    {   
+        $insertReceipt = Booking::find($request->id);
+        // dd($insertReceipt);
+
+        if (is_null($insertReceipt)) {
+            return response()->json([
+                'status' => false,
+                'error' => 'Booking Invalid',
+            ]);
+        }
+
+        if ($request->file('payment_receipt')) {
+            $receiptFile = $request->file('payment_receipt');
+            $receiptFilename = $insertReceipt->id . '_receipt_' . $insertReceipt->id . '.' . $receiptFile->getClientOriginalExtension();
+
+            storage::put($this->bookingReceiptFilePath . $receiptFilename, file_get_contents($receiptFile));
+
+            // Upload file
+            $insertReceipt->payment_receipt = $receiptFilename;
+            $insertReceipt->save();
+        }
+
+        return response()->json([
+            'status' => true,
+        ]);
     }
 
     public function completed()
@@ -278,6 +413,8 @@ class BookingController extends Controller
                             $pickupPlace = 'Larkin';
                         } else if ($bookingData->pickup_area == 5) {
                             $pickupPlace = 'Other : '. $bookingData->area_outside_jb;
+                        }else if ($bookingData->pickup_area == 6) {
+                            $pickupPlace = 'Senai Airport';
                         }
                     }
 
@@ -400,6 +537,10 @@ class BookingController extends Controller
 
         if($bookingData->renter_selfie) {
             $bookingData->renter_selfie = asset($this->bookingSelfieStorageFilePath . $bookingData->renter_selfie);
+        }
+
+        if($bookingData->payment_receipt) {
+            $bookingData->payment_receipt = asset($this->bookingReceiptStorageFilePath . $bookingData->payment_receipt);
         }
 
 

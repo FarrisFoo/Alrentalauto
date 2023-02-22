@@ -157,24 +157,28 @@
                         <div class="card-body">
                             <h5 class="d-flex align-items-center mb-3">Supporting Documents</h5>
                             <div class="row">
-                                <div class="col-sm-4">  
+                                <div class="col-sm-3">  
                                     <p>Renter's IC</p>
-                                    <img src="{{ $bookingData->renter_ic }}" style="height: 150px" />
+                                    <img src="{{ $bookingData->renter_ic }}" style="height: 120px" />
                                     @if ($bookingData->renter_ic_back != null)
-                                    <img src="{{ $bookingData->renter_ic_back }}" style="height: 150px" />
+                                    <img src="{{ $bookingData->renter_ic_back }}" style="height: 120px" />
                                     @endif
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <p>Renter's License</p>
-                                    <img src="{{ $bookingData->renter_license }}" style="height: 150px" />
+                                    <img src="{{ $bookingData->renter_license }}" style="height: 120px" />
                                     @if ($bookingData->renter_license_back != null)
-                                    <img src="{{ $bookingData->renter_license_back }}" style="height: 150px" />
+                                    <img src="{{ $bookingData->renter_license_back }}" style="height: 120px" />
                                     @endif
                                 </div>
-                                <div class="col-sm-4">
+                                <div class="col-sm-3">
                                     <p>Renter's Selfie</p>
-                                    <img src="{{ $bookingData->renter_selfie }}" style="height: 150px" />
+                                    <img src="{{ $bookingData->renter_selfie }}" style="height: 120px" />
                                 </div> 
+                                <div class="col-sm-3">
+                                    <p>Renter's Receipt</p>
+                                    <img src="{{ $bookingData->payment_receipt }}" style="height: 120px" />
+                                </div>
                             </div>
                         </div>
                     </div>

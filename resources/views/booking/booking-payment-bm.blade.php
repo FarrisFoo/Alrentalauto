@@ -68,22 +68,61 @@
                                     <div class="col-12 text-center">
                                         <span style="font-weight:600;">Sila pastikan informasi dimasukkan dan bayaran adalah TEPAT, sebarang kesilapan dan informasi yang tidak tepat akan ditolak dan disenari hitam.</span>
                                     </div>
+
+                                    <div class="col-12 mt-4">
+                                        <table class="w-100" style="border: 1px solid">
+                                            <tr style="border: 1px solid">
+                                                <th class="col-mb-3"></th>
+                                                <th class="col-3">Maklumat</th>
+                                                <th class="col-3">Harga</th>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-4">Deposit</td>
+                                                <td class="col-4"></td>
+                                                <td class="col-4">RM100</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="col-4">Kereta</td>
+                                                <td class="col-4">{{ $carModel }} | RM{{ $carPrice }}</td>
+                                                <td class="col-4">RM{{ $totalRent }}</td>
+                                            </tr>
+                                            <tr class="col-4">
+                                                <td class="col-4">Tempoh Sewa</td>
+                                                <td class="col-4">{{ $bookingDuration }} Hari</td>
+                                                <td class="col-4"></td>
+                                            </tr>
+                                            @if ($bookingData->pickup_method != 0)
+                                            <tr class="col-4">
+                                                <td class="col-4">Penghantaran</td>
+                                                <td class="col-4">{{ $pickupPlace }}</td>
+                                                <td class="col-4">RM{{ $deliveryCharge }}</td>
+                                            </tr>
+                                            @endif
+                                            <tr class="col-4">
+                                                <td class="col-4">&nbsp;</td>
+                                                <th class="col-4">&nbsp;</th>
+                                                <td class="col-4">&nbsp;</td>
+                                            </tr>
+                                            <tr class="col-4">
+                                                <td class="col-4"></td>
+                                                <th class="col-4">Jumlah</th>
+                                                <td class="col-4" style="font-weight:600;font-size:20px;">RM{{ $overallTotal }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                         
 									<div class="login-separater text-center mb-4"> <span>PILIH CARA BAYARAN</span>
 										<hr/>
 									</div>
-									<div class="form-body">
-										<form class="row g-3" id="cust-booking-form" enctype="multipart/form-data">
-                                            
-                                            <div class="col-12">
-                                                <label for="payment_method" class="form-label">Cara Bayaran</label>
-                                                <select class="form-select mb-3" id="payment_method" name="payment_method" aria-label="Default select example">
-                                                    <option selected disabled>Pilih Cara Bayaran</option>
-                                                    <option value="1" disabled>Bayaran Atas Talian/FPX (Akan datang)</option>
-                                                    <option value="2">Pembayaran Manual</option>
-                                                    <option value="3">Bayaran Semasa Ambil Kenderaan</option>
-                                                </select>
-                                            </div>
+                                        <div class="col-12">
+                                            <label for="payment_method" class="form-label">Cara Bayaran</label>
+                                            <select class="form-select mb-3" id="payment_method" name="payment_method" aria-label="Default select example">
+                                                <option selected disabled>Pilih Cara Bayaran</option>
+                                                <option value="1" disabled>Bayaran Atas Talian/FPX (Akan datang)</option>
+                                                <option value="2">Pembayaran Manual</option>
+                                                <option value="3">Bayaran Semasa Ambil Kenderaan</option>
+                                            </select>
+                                        </div>
                                             
                                             <div class="col-12 d-none" id="receipt_div">
                                                 <div class="login-separater text-center mb-4"> <span>Pembayaran Manual</span>
@@ -94,8 +133,10 @@
                                                 <h5 class="text-center mb-0" style="font-weight:600;">Maybank</h5>
                                                 <br>
                                                 <p class="text-center mb-0"> dan muat naik <span style="font-weight:600;">resit bayaran</span></p>
-										        <form class="row g-3" id="receipt-form" enctype="multipart/form-data">
+										        
+                                                <form class="row g-3" id="receipt-form" enctype="multipart/form-data">
                                                     <p class="mb-0">Muat Naik Resit</p>
+                                                    <input type="hidden" name="booking_id" value="{{ $bookingData->id }}">
                                                     <div class="input-group control-group mt-0">
                                                         <input type="file" name="payment_receipt" class="form-control">
                                                     </div>
@@ -106,6 +147,7 @@
                                                         </div>
                                                     </div>
                                                 </form>
+
                                                 <h6 class="text-center mb-4 mt-4">ATAU</h6>
                                                 <p>Sila hantar <span style="font-weight:600;">Resit Bayaran</span> kepada salah seorang wakil kami melalui Whatsapp dan tunggu pengesahan bayaran sebelum menekan <span style="font-weight:600;">Pengesahan Tempahan</span>.</p>
                                                 <a href="https://wa.link/wjmk2a" target="_blank" style="font-weight:600;">Al Hazril&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+60 14-515 6050</a>
@@ -119,8 +161,6 @@
                                                 <br>
                                             </div>
 
-                                            
-                                            
                                             <br/>
 											<div class="col-12">
 												<div class="d-grid">
@@ -186,17 +226,18 @@
             }
         });
 
-        $(document).on('submit', '#cust-booking-form', function (e) {
+        $(document).on('submit', '#receipt-form', function (e) {
             e.preventDefault();
             // showLoading();
             
             var formData = new FormData();
-            
+
+            formData.append('id', $('input[name="booking_id"]').val());
             formData.append('payment_receipt', $('input[name="payment_receipt"]')[0].files[0]);
 
             $.ajax({
                 type: 'POST',
-                url: '{{ route("booking.post") }}',
+                url: '{{ route("booking.receipt") }}',
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -229,16 +270,16 @@
                     } else {
                         Swal.fire({
                             icon: 'success', 
-                            title: 'Thank you!', 
-                            text: 'Your receipt will be view by the admin, please click on Complete Booking.',
+                            title: 'Terima Kasih!', 
+                            text: 'Resit akan dihantarkan kepada admin, sila tekan butang pengesahan tempahan.',
                         })
                     }
                 }, 
                 error: function () {
                     Swal.fire({
                         icon: 'warning', 
-                        title: 'Something went wrong!', 
-                        text: 'Please try again later or contact the administator.',
+                        title: 'Ada Masalah!', 
+                        text: 'Sila cuba lagi ataupun hubungi admin kami.',
                     });
                 }
             });

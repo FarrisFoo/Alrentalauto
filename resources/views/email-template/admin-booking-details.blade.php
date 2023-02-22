@@ -296,15 +296,15 @@
                                                     <table border="1" cellpadding="0" cellspacing="0" width="90%">
                                                         <tr>
                                                             {{ $message->embed($bookingDetails->renter_license) }}
-                                                            @if ($bookingDetails->renter_license_back != null)
+                                                        </tr>
+                                                        <tr>
                                                             {{ $message->embed($bookingDetails->renter_license_back) }}
-                                                            @endif
                                                         </tr>
                                                         <tr>
                                                             {{ $message->embed($bookingDetails->renter_ic) }}
-                                                            @if ($bookingDetails->renter_ic_back != null)
+                                                        </tr>
+                                                        <tr>
                                                             {{ $message->embed($bookingDetails->renter_ic_back) }}
-                                                            @endif
                                                         </tr>
                                                         <tr>
                                                             {{ $message->embed($bookingDetails->renter_selfie) }}

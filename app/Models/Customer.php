@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Customer extends Model
+{
+    use HasFactory;
+
+    protected $table = 'customer';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name',
+        'ic_num',
+        'address',
+        'phone_num',
+        'emergency_phone_num',
+        'occupation',
+        'company_name',
+    ];
+}

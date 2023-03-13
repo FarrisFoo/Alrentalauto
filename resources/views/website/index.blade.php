@@ -421,7 +421,7 @@ nav .navbar-nav:last-child{
     <!--START OF NAVIGATION BAR      START OF NAVIGATION BAR     START OF NAVIGATION BAR-->
     <nav class="navbar navbar-expand-md navbar-black bg-black">
       <a href="{{ route('website.index') }}" class="navbar-brand">
-          <img src="image/logo.png" height="60">AL Car Rental
+          <img src="assets/images/logo-icon.png" height="60">&nbsp;AL Car Rental
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
           <span class="navbar-toggler-icon">
@@ -432,8 +432,8 @@ nav .navbar-nav:last-child{
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
               <a href="{{ route('website.index') }}" class="nav-item nav-link active">  HOME  </a>
-              <a href="car.html" class="nav-item nav-link">  OUR CAR  </a>
-              <a href="about.html" class="nav-item nav-link">  ABOUT  </a>
+              <a href="{{ route('website.car') }}" class="nav-item nav-link">  OUR CAR  </a>
+              <a href="{{ route('website.about') }}" class="nav-item nav-link">  ABOUT  </a>
               <a href="testimonial.php" class="nav-item nav-link">  TESTIMONIAL  </a>
               <a href="cardelivery.php" class="nav-item nav-link">  CAR DELIVERY  </a>
               <a href="contact.php" class="nav-item nav-link">  CONTACT  </a>
@@ -447,11 +447,8 @@ nav .navbar-nav:last-child{
     <!-- START OF HEADER     START OF HEADER     START OF HEADER-->
     <section class="hmain">
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    </div>
     <div class="carousel-inner">
-      <div class="carousel-item active" style="background-image: {{ asset('assets/images/booking-form-cover.png') }};background-size:contain;background-position:center;">
+      <div class="carousel-item active" style="background-image: url('assets/images/booking-form-cover.png') ;background-size:contain;background-position:center;">
         <div class="carousel-caption">
           <p></p>
         </div>
@@ -499,22 +496,22 @@ nav .navbar-nav:last-child{
     <div class="dstepper">
       <ul>
         <li>
-          <img src="image/bookingicon.webp"><br>
+          <img src="assets/images/website-images/bookingicon.webp"><br>
           <i class="fa fa-check"></i>
           <p>Book Any Car</p>
         </li>
         <li>
-          <img src="image/dealingicon.webp"><br>
+          <img src="assets/images/website-images/dealingicon.webp"><br>
           <i class="fa fa-check"></i>
           <p>Deal Confirmation</p>
         </li>
         <li>
-          <img src="image/payingicon.webp"><br>
+          <img src="assets/images/website-images/payingicon.webp"><br>
           <i class="fa fa-check"></i>
           <p>Pay The Rent</p>
         </li>
         <li>
-          <img src="image/carrenticon.webp"><br>
+          <img src="assets/images/website-images/carrenticon.webp"><br>
           <i class="fa fa-check"></i>
           <p>Deliver The Car</p>
         </li>

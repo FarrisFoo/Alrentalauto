@@ -31,6 +31,10 @@ Route::middleware(['web'])->group(function () {
         */
         Route::get('/', [WebsiteController::class, 'index'])->name('website.index');
 
+        Route::get('/our-car', [WebsiteController::class, 'car'])->name('website.car');
+
+        Route::get('/about-us', [WebsiteController::class, 'about'])->name('website.about');
+
         /*
         * Customer booking function
         */

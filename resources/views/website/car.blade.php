@@ -121,7 +121,7 @@ nav .navbar-nav:last-child{
             <figcaption class="info-wrap">
               <h6 class="title text-dots"><a href="#">Perodua Myvi 2021</a></h6>
               <div class="action-wrap">
-                <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                 <div class="price-wrap h5">
                   <span class="price-new">RM140</span>
                   <!--<del class="price-old">$1980</del>-->
@@ -137,7 +137,7 @@ nav .navbar-nav:last-child{
             <figcaption class="info-wrap">
               <h6 class="title text-dots"><a href="#">Perodua Myvi 2010</a></h6>
               <div class="action-wrap">
-                <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                 <div class="price-wrap h5">
                   <span class="price-new">RM110</span>
                 </div> <!-- price-wrap.// -->
@@ -152,7 +152,7 @@ nav .navbar-nav:last-child{
             <figcaption class="info-wrap">
               <h6 class="title text-dots"><a href="#">Perodua Axia</a></h6>
               <div class="action-wrap">
-                <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                 <div class="price-wrap h5">
                   <span class="price-new">RM120</span>
                 </div> <!-- price-wrap.// -->
@@ -167,7 +167,7 @@ nav .navbar-nav:last-child{
             <figcaption class="info-wrap">
               <h6 class="title text-dots"><a href="#">Perodua Viva</a></h6>
               <div class="action-wrap">
-                <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                 <div class="price-wrap h5">
                   <span class="price-new">RM110</span>
                 </div> <!-- price-wrap.// -->
@@ -187,7 +187,7 @@ nav .navbar-nav:last-child{
               <figcaption class="info-wrap">
                 <h6 class="title text-dots"><a href="#">Perodua Bezza</a></h6>
                 <div class="action-wrap">
-                  <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                  <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                   <div class="price-wrap h5">
                     <span class="price-new">RM130</span>
                   </div> <!-- price-wrap.// -->
@@ -203,7 +203,7 @@ nav .navbar-nav:last-child{
               <figcaption class="info-wrap">
                 <h6 class="title text-dots"><a href="#">Proton Saga</a></h6>
                 <div class="action-wrap">
-                  <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                  <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                   <div class="price-wrap h5">
                     <span class="price-new">RM120</span>
                   </div> <!-- price-wrap.// -->
@@ -219,7 +219,7 @@ nav .navbar-nav:last-child{
               <figcaption class="info-wrap">
                 <h6 class="title text-dots"><a href="#">Perodua Alza</a></h6>
                 <div class="action-wrap">
-                  <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                  <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                   <div class="price-wrap h5">
                     <span class="price-new">RM180</span>
                   </div> <!-- price-wrap.// -->
@@ -234,7 +234,7 @@ nav .navbar-nav:last-child{
               <figcaption class="info-wrap">
                 <h6 class="title text-dots"><a href="#">Hyundai Starex</a></h6>
                 <div class="action-wrap">
-                  <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                  <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                   <div class="price-wrap h5">
                     <span class="price-new">RM450</span>
                   </div> <!-- price-wrap.// -->
@@ -254,7 +254,7 @@ nav .navbar-nav:last-child{
                 <figcaption class="info-wrap">
                   <h6 class="title text-dots"><a href="#">Toyota Vellfire</a></h6>
                   <div class="action-wrap">
-                    <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                    <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                     <div class="price-wrap h5">
                       <span class="price-new">RM600</span>
                     </div> <!-- price-wrap.// -->
@@ -269,7 +269,7 @@ nav .navbar-nav:last-child{
                 <figcaption class="info-wrap">
                   <h6 class="title text-dots"><a href="#">Nissan Navara</a></h6>
                   <div class="action-wrap">
-                    <a href="booking.php" class="btn btn-warning btn-sm float-right"> Book </a>
+                    <a href="{{ route('booking-form') }}" class="btn btn-warning btn-sm float-right"> Book </a>
                     <div class="price-wrap h5">
                       <span class="price-new">RM450</span>
                     </div> <!-- price-wrap.// -->

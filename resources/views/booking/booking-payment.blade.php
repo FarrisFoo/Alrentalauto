@@ -141,7 +141,7 @@
                                                     <p class="mb-0">Upload Receipt</p>
                                                     <input type="hidden" name="booking_id" value="{{ $bookingData->id }}">
                                                     <div class="input-group control-group mt-0">
-                                                        <input type="file" name="payment_receipt" class="form-control">
+                                                        <input type="file" accept="image/*" name="payment_receipt" class="form-control">
                                                     </div>
                                                     <p class="mt-4 text-center mb-0">click <span style="font-weight:600;">Submit Receipt</span> before clicking on <span style="font-weight:600;">Complete Booking</span></p>
                                                     <div class=" col-12">

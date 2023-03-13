@@ -24,6 +24,37 @@
 	<title>Alrentalauto | Booking</title>
 
     <style>
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        #loading-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .spinner {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            border: 3px solid #ddd;
+            border-top-color: #000;
+            border-radius: 100%;
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         .booking-card {
             margin-top:300px;
             margin-bottom: 80px;
@@ -119,7 +150,7 @@
 											</div>
 
                                             <div class="col-12">
-												<label for="destination" class="form-label">Destinasi</label>
+												<label for="destination" class="form-label">Destinasi Dituju</label>
 												<input type="text" class="form-control" id="destination" name="destination" placeholder="Pasir Gudang">
 											</div>
 
@@ -154,7 +185,7 @@
                                                     <option value="2">RM20 | Permas</option>
                                                     <option value="3">RM30 | Johor Bahru</option>
                                                     <option value="4">RM30 | Larkin</option>
-                                                    <option value="6">RM30 | Lapangan Terbang Senai</option>
+                                                    <option value="6">RM60 | Lapangan Terbang Senai</option>
                                                     <option value="5">RM50 | Kawasan luar Johor Bahru (exp: Gelang Patah, Iskandar, Senai)</option>
                                                 </select>
                                             </div>
@@ -229,27 +260,27 @@
                                             <h5 for="renter_ic mb-1" class="form-label">Kad Pengenalan</h5>
                                             <p class="mb-0">Depan</p>
                                             <div class="input-group control-group mt-0">
-                                                <input type="file" name="renter_ic" class="form-control">
+                                                <input type="file" accept="image/*" name="renter_ic" class="form-control">
                                             </div>
                                             <p class="mb-0">Belakang</p>
                                             <div class="input-group control-group mt-0 mb-4">
-                                                <input type="file" name="renter_ic_back" class="form-control">
+                                                <input type="file" accept="image/*" name="renter_ic_back" class="form-control">
                                             </div>
 
                                             <h5 for="renter_license mb-1" class="form-label">Lesen Kenderaan</h5>
                                             <p class="mb-0">Depan</p>
                                             <div class="input-group mt-0 control-group">
-                                                <input type="file" name="rental_license" class="form-control">
+                                                <input type="file" accept="image/*" name="rental_license" class="form-control">
                                             </div>
                                             <p class="mb-0">Belakang</p>
                                             <div class="input-group mt-0 control-group mb-4">
-                                                <input type="file" name="rental_license_back" class="form-control">
+                                                <input type="file" accept="image/*" name="rental_license_back" class="form-control">
                                             </div>
 
                                             <h5 for="renter_selfie mb-1" class="form-label">Selfie bersama Lesen Kenderaan</h5>
                                             <p class="mb-0"></p>
                                             <div class="input-group mt-0 control-group">
-                                                <input type="file" name="renter_selfie" class="form-control">
+                                                <input type="file" accept="image/*" name="renter_selfie" class="form-control">
                                             </div>
 
                                             <div class="login-separater text-center"> <span>KIRAAN TEMPAHAN</span>
@@ -308,6 +339,11 @@
 												</div>
 											</div>
 											<div class="col-12">
+												<div>
+													<label>Sila tunggu 5 hingga 20 saat selepas anda menekan butang "Tempah Sekarang"</label>
+												</div>
+											</div>
+											<div class="col-12">
 												<div class="d-grid">
 													<button type="submit" class="btn btn-primary">Tempah Sekarang</button>
 												</div>
@@ -349,6 +385,25 @@
     <script src="sweetalert2.all.min.js"></script>
 
 	<script>
+        // pre-loader
+        function showLoading() {
+            // create the pre-loader element
+            var loading = document.createElement('div');
+            loading.id = 'loading';
+            loading.innerHTML = '<div id="loading-inner"><div class="spinner"><img src="assets/images/logo-icon.png" width="100%"></div></div>';
+
+            // add the pre-loader element to the page
+            document.body.appendChild(loading);
+        }
+
+        function closeLoading() {
+            // remove the pre-loader element from the page
+            var loading = document.getElementById('loading');
+            if (loading) {
+                loading.parentNode.removeChild(loading);
+            }
+        }
+
         //get total day
         var pickupDate = new Date($('date'))
         var carModel = '';
@@ -490,7 +545,7 @@
 
         $(document).on('submit', '#cust-booking-form', function (e) {
             e.preventDefault();
-            // showLoading();
+            showLoading();
             
             var formData = new FormData();
 
@@ -525,6 +580,7 @@
             formData.append('tnc_check', $('input[name="tnc-check"]').val());
 
             if ($('input[name="tnc-check"]').val() != '1') {
+                closeLoading();
                 Swal.fire({
                     icon: 'question', 
                     title: 'Tidak bersetuju dengan kami?', 
@@ -539,7 +595,7 @@
                     contentType: false,
                     cache: false,
                     success: function(data) {
-                        // closeLoading();
+                        closeLoading();
                         if (!data.status) {
                             // -- Remove all previous error.
                             $('.cbwus-error-after-input').remove();

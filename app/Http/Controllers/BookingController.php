@@ -94,7 +94,7 @@ class BookingController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => false,
-                'error' => $validator->errors(),
+                'error' => 'error',
             ]);
         }
         
@@ -131,7 +131,7 @@ class BookingController extends Controller
 
         if ($request->file('renter_ic')) {
             $icFile = $request->file('renter_ic');
-            $icFilename = $createNewCustomer->id . '_ic_' . $formatted_ic . '.' . $icFile->getClientOriginalExtension();
+            $icFilename = $createNewCustomer->id . '_ic' . $formatted_ic . '.' . $icFile->getClientOriginalExtension();
 
             storage::put($this->bookingIcFilePath . $icFilename, file_get_contents($icFile));
 
@@ -141,7 +141,7 @@ class BookingController extends Controller
 
         if ($request->file('renter_ic_back')) {
             $icFile_back = $request->file('renter_ic_back');
-            $icFilename_back = $createNewCustomer->id . '_ic-back_' . '.' . $icFile_back->getClientOriginalExtension();
+            $icFilename_back = $createNewCustomer->id . '_icback' . '.' . $icFile_back->getClientOriginalExtension();
 
             storage::put($this->bookingIcFilePath . $icFilename_back, file_get_contents($icFile_back));
 
@@ -151,7 +151,7 @@ class BookingController extends Controller
         
         if ($request->file('rental_license')) {
             $licenseFile = $request->file('rental_license');
-            $licenseFilename = $createNewCustomer->id . '_license_' . '.' . $licenseFile->getClientOriginalExtension();
+            $licenseFilename = $createNewCustomer->id . '_license' . '.' . $licenseFile->getClientOriginalExtension();
 
             storage::put($this->bookingLicenseFilePath . $licenseFilename, file_get_contents($licenseFile));
 
@@ -161,7 +161,7 @@ class BookingController extends Controller
 
         if ($request->file('rental_license_back')) {
             $licenseFile_back = $request->file('rental_license_back');
-            $licenseFilename_back = $createNewCustomer->id . '_license-back_' . '.' . $licenseFile_back->getClientOriginalExtension();
+            $licenseFilename_back = $createNewCustomer->id . '_licenseback' . '.' . $licenseFile_back->getClientOriginalExtension();
 
             storage::put($this->bookingLicenseFilePath . $licenseFilename_back, file_get_contents($licenseFile_back));
 
@@ -171,7 +171,7 @@ class BookingController extends Controller
 
         if ($request->file('renter_selfie')) {
             $selfieFile = $request->file('renter_selfie');
-            $selfieFilename = $createNewCustomer->id . '_selfie_' . '.' . $selfieFile->getClientOriginalExtension();
+            $selfieFilename = $createNewCustomer->id . '_selfie' . '.' . $selfieFile->getClientOriginalExtension();
 
             storage::put($this->bookingSelfieFilePath . $selfieFilename, file_get_contents($selfieFile));
 
@@ -182,7 +182,6 @@ class BookingController extends Controller
         $createNewBooking->save();
 
         $bookingDetails = Booking::where('id', $createNewBooking->id)->with('customer')->first();
-        // dd($bookingDetails);
 
         if($bookingDetails->renter_ic) {
             $bookingDetails->renter_ic = asset($this->bookingIcStorageFilePath . $bookingDetails->renter_ic);
@@ -322,8 +321,6 @@ class BookingController extends Controller
         }
 
         $overallTotal = ($carPrice * $bookingDuration) + $deliveryCharge + 100; 
-
-        // dd($totalRent);
 
         return view('booking.booking-payment-bm', compact('bookingData', 'carPrice', 'carModel', 'bookingDuration', 'totalRent', 'deliveryCharge', 'overallTotal', 'pickupPlace'));
     }

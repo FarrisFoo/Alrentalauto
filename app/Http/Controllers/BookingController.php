@@ -264,8 +264,6 @@ class BookingController extends Controller
 
         $overallTotal = ($carPrice * $bookingDuration) + $deliveryCharge + 100; 
 
-        // dd($totalRent);
-
         return view('booking.booking-payment', compact('bookingData', 'carPrice', 'carModel', 'bookingDuration', 'totalRent', 'deliveryCharge', 'overallTotal', 'pickupPlace'));
     }
 
@@ -397,7 +395,7 @@ class BookingController extends Controller
                     return $selectedCar;
                 })
                 ->editColumn('pickup_place', function($bookingData) {
-                    if ($bookingData->pickup_method == 0) {
+                    if ($bookingData->pickup_method == 0 || $bookingData->pickup_method == "null" ) {
                         $pickupPlace = 'Lot Inkubator PIJ, Taman Bukit Dahlia';
                     } else{
                         if ($bookingData->pickup_area == 1) {
@@ -412,6 +410,8 @@ class BookingController extends Controller
                             $pickupPlace = 'Other : '. $bookingData->area_outside_jb;
                         }else if ($bookingData->pickup_area == 6) {
                             $pickupPlace = 'Senai Airport';
+                        }else {
+                             $pickupPlace = 'Error : User Not Selecting pickup_area';
                         }
                     }
 
@@ -477,6 +477,8 @@ class BookingController extends Controller
                 $pickupPlace = 'Larkin';
             } else if ($bookingData->pickup_area == 5) {
                 $pickupPlace = ucfirst($bookingData->area_outside_jb);
+            }else {
+                $pickupPlace = 'Error : User Not Selecting pickup_area';
             }
         }
 
@@ -715,7 +717,6 @@ class BookingController extends Controller
             $bookingDetails->renter_selfie = asset($this->bookingSelfieStorageFilePath . $bookingDetails->renter_selfie);
         }
 
-        // Mail::to('alcarrentalpasirgudang@gmail.com')->send(new BookingMail($bookingDetails));
 
         return response()->json([
             'status' => true,

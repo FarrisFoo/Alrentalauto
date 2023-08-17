@@ -22,7 +22,7 @@
 	<link href="assets/css/app.css" rel="stylesheet">
 	<link href="assets/css/icons.css" rel="stylesheet">
 	<title>Alrentalauto | Login</title>
-</head>
+</head>	
 
 <body>
 	<!--wrapper-->

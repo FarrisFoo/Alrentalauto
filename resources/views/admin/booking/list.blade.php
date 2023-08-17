@@ -85,7 +85,8 @@
                     data: 'action',
                     name: 'action'
                 },
-            ]
+            ],
+            order: [[0, 'desc']],
         });
     });
 

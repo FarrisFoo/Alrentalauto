@@ -5,20 +5,13 @@
         <div class="page-content">
             <!--breadcrumb-->
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Car</div>
+                <div class="breadcrumb-title pe-3">Booking Past Record</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0" style="background-color: white !important;">
-                            <li class="breadcrumb-item">Add New</li> <!-- change here -->
+                            <li class="breadcrumb-item">Add Past Record</li> <!-- change here -->
                         </ol>
                     </nav>
-                </div>
-                <div class="ms-auto">
-                    <div class="btn-group">
-                        <div class="button-table float-right">
-                            <a href="{{ route('booking.list') }}"><button type="button" class="btn btn-primary btn-rounded"><i class="lni lni-plus pb-1"></i>Back</button></a>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!--end breadcrumb-->
@@ -34,9 +27,9 @@
 
                         <label for="renter_name" class="form-label">Identity Card</label>
                         <div class="input-group col-6" style="margin-top:0;">
-                            <input type="text" class="form-control" placeholder="991231" id="renter_ic_front" name="renter_ic_front"> <span class="mx-2">-</span>
-                            <input type="text" class="form-control" placeholder="00" id="renter_ic_mid" name="renter_ic_mid"> <span class="mx-2">-</span>
-                            <input type="text" class="form-control" placeholder="1111" id="renter_ic_end" name="renter_ic_end">
+                            <input type="text" class="form-control" id="renter_ic_front" name="renter_ic_front"> <span class="mx-2">-</span>
+                            <input type="text" class="form-control" id="renter_ic_mid" name="renter_ic_mid"> <span class="mx-2">-</span>
+                            <input type="text" class="form-control" id="renter_ic_end" name="renter_ic_end">
                         </div>
 
                         <div>
@@ -46,12 +39,12 @@
 
                         <div>
                             <label for="renter_phone" class="form-label">Phone Number</label>
-                            <input type="text" class="form-control" id="renter_phone" name="renter_phone" placeholder="011-00000000">
+                            <input type="text" class="form-control" id="renter_phone" name="renter_phone">
                         </div>
 
                         <div>
                             <label for="emergency_renter_phone" class="form-label">Emergency Phone Number</label>
-                            <input type="text" class="form-control" id="emergency_renter_phone" name="emergency_renter_phone" placeholder="011-00000000">
+                            <input type="text" class="form-control" id="emergency_renter_phone" name="emergency_renter_phone">
                         </div>
 
                         <div class="login-separater text-center mb-4"> <span>RENTER DETAILS</span>
@@ -71,12 +64,12 @@
 
                         <div class="col-12 d-none" id="company_name_div">
                             <label for="company_name" class="form-label">Company Name</label>
-                            <input type="text" class="form-control" id="company_name" name="company_name" placeholder="Al Rental Auto">
+                            <input type="text" class="form-control" id="company_name" name="company_name">
                         </div>
 
                         <div class="col-12">
                             <label for="destination" class="form-label">Destination to go</label>
-                            <input type="text" class="form-control" id="destination" name="destination" placeholder="Pasir Gudang">
+                            <input type="text" class="form-control" id="destination" name="destination">
                         </div>
 
                         <div class="login-separater text-center mb-4"> <span>RENT INFORMATION</span>
@@ -117,7 +110,7 @@
 
                         <div class="col-12 d-none" id="outside_area_div">
                             <label for="outside_area" class="form-label">Pickup Area (Outside Johor Bahru)</label>
-                            <input type="text" class="form-control" id="outside_area" name="outside_area" placeholder="Gelang Patah">
+                            <input type="text" class="form-control" id="outside_area" name="outside_area">
                         </div>
 
                         <div class="mb-3">

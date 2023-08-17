@@ -27,323 +27,34 @@
   <title>Al Car Rental | About Our Company</title>
 </head>
 <body>
-  <style>
-  .hmain{
-  position: relative;
-  min-height: 70vh;
-  background: radial-gradient(#fdf35e,#817400);
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 30px 100px;
-}
+    <style>
+      /* nav bar css  */
+      body{
+        color: #000000;
+      }
+        .navbar {
+        margin-bottom: -1px !important;
+        border-radius: 0px !important;
+      }
 
-.hcontent{
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.hcontent .htext{
-  width: 100%;
-  max-width: 600px;
-}
-
-.hcontent .htext h2{
-  color: #fff;
-  font-size: 5em;
-  font-weight: 300;
-}
-
-.hcontent .htext h2 span{
-  font-weight: 700;
-}
-
-.hcontent .htext p{
-  color: #fff;
-  font-weight: 400;
-  font-size: 1.1em;
-  line-height: 1.5em;
-  margin: 20px 0;
-}
-
-.hbtn{
-  position: relative;
-  display: inline-block;
-  padding: 20px 50px;
-  background: #fff;
-  color: #333;
-  font-size: 1.1em;
-  font-weight: 500;
-  border-radius: 40px;
-  text-decoration: none;
-  transition: 0.25s;
-}
-
-.hbtn:hover{
-  letter-spacing: 2px;
-}
-
-.hslider{
-  position: relative;
-}
-
-.hslider .hslides{
-  display: none;
-}
-
-.hslider .hslides.active{
-  display: block;
-}
-
-.hslider .hslides img{
-  width: 100%;
-  max-width: 600px;
-}
-
-.hfooter{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  padding: 20px 100px;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.hsci{
-  display: flex;
-}
-
-.hsci li{
-  list-style: none;
-}
-
-.hsci li a{
-  color: #fff;
-  font-size: 2.5em;
-  display: inline-block;
-  transition: 0.25s;
-  margin-bottom: 0px;
-}
-.hsci li a:hover{
-  transform: translateY(-7px);
-}
-
-.hprevnext{
-  position: relative;
-  user-select: none;
-}
-
-.hprevnext span{
-  position: relative;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  width: 25px;
-  height: 25px;
-  border: 1px solid #fff;
-  cursor: pointer;
-  font-size: 1em;
-  color: #fff;
-}
-.hprevnext span:nth-child(2){
-  margin-right: 20px;
-}
-
-/*FOR SEARCH BOX*/
-.booksearchbox{
-  margin-top: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  bottom: 0;
-  position: relative;
-  flex-wrap: wrap;
-  background: #fff;
-  padding: 30px 50px;
-  transform: translateY(-50%);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 1);
-}
-.booksearchbox .bookinputbox{
-  margin: 0 20px;
-}
-.booksearchbox .bookinputbox p{
-  color: #222;
-  margin-bottom: 10px;
-}
-.booksearchbox .bookinputbox p.nonesense{
-  color: #fff;
-}
-.booksearchbox .bookinputbox input{
-  border: 1px solid #222;
-  outline: none;
-  padding: 10px;
-  width: 100%;
-  min-width: 150px;
-  font-size: 1.1em;
-}
-.booksearchbox .bookinputbox input[type="submit"]{
-  outline: none;
-  border: none;
-  background: #6b4900;
-  color: #fff;
-  cursor: pointer;
-  letter-spacing: 8px;
-  padding: 13px;
-}
-
-/*FOR STEPPER*/
-.dstepper{
-  margin: 10px auto;
-  font-family: sans-serif;
-  color: #6b4900;
-}
-.dstepper img{
-  width: 80px;
-  margin-bottom: 20px;
-}
-.dstepper ul{
-  text-align: center;
-}
-.dstepper ul li{
-  display: inline-block;
-  width: 200px;
-  position: relative;
-}
-.dstepper ul li .fa{
-  background-color: #6b4900;
-  width: 30px;
-  height: 30px;
-  color: #fff;
-  border-radius: 50%;
-  padding: 8px;
-}
-
-.dstepper ul li .fa::after{
-  content: '';
-  background: #6b4900;
-  height: 5px;
-  width: 205px;
-  display: block;
-  position: absolute;
-  left: 0;
-  top: 112px;
-  z-index: -1;
-}
-.dstepper ul li:first-child .fa::after{
-  width: 105px;
-  left: 100px;
-}
-.dstepper ul li:last-child .fa::after{
-  width: 105px;
-  right: 100px;
-}
-
-.wrapper .items span:first-child{
-  background-color: #fff;
-  border: 0px;
-  color: #fff;
-}
+      nav .navbar-brand {
+        color: white !important;
+        font-family: 'Fugaz One', cursive;
+        }
 
 
-@media (max-width:991px){
-  .hmain{
-    padding: 40px;
-  }
-  .hcontent{
-    flex-direction: column;
-    margin-top: 120px 0 40px;
-  }
-  .hcontent .htext{
-    max-width: 100%;
-  }
-  .hcontent .htext h2{
-    font-size: 4em;
-  }
-  .hslider{
-    margin-top: 40px;
-  }
-  .hslider .hslides img{
-    width: 100%;
-    max-width: 420px;
-  }
-  .hfooter{
-    position: relative;
-    padding: 0;
-  }
-  .hfooter .hsci{
-    position: relative;
-    padding: 0;
-  }
-  .booksearchbox{
-    flex-direction: column;
-    margin-top: 150px;
-  }
-  .booksearchbox .bookinputbox p{
-    margin-top: 10px;
-  }
-  .dstepper{
-    margin-top: -180px;
-    max-width: 990px;
-  }
-  .dstepper ul li{
-    max-width: 150px;
-  }
-  .dstepper ul li .fa::after{
-    max-width: 154px;
-  }
-  .dstepper ul li:first-child .fa::after{
-    width: 84.5px;
-    left: 70px;
-  }
-  .dstepper ul li:last-child .fa::after{
-    width: 84.5px;
-    right: 70px;
-  }
-}
-@media (max-width:426px){
-  .dstepper{
-    margin-top: -180px;
-    max-width: 550px;
-  }
-  .dstepper img{
-    width: 40px;
-    margin-bottom: 20px;
-  }
-  .dstepper ul li{
-    max-width: 70px;
-  }
-  .dstepper ul li .fa::after{
-    max-width: 75px;
-    top: 73px;
-  }
-  .dstepper ul li:first-child .fa::after{
-    width: 44.5px;
-    left: 37px;
-  }
-  .dstepper ul li:last-child .fa::after{
-    width: 44.5px;
-    right: 37px;
-  }
-}
+      nav .navbar-nav a{
+        padding-right: 25px !important;
+        color: white !important;
+        }
+      nav .navbar-nav:last-child{
+        float: right !important;
 
-@media (max-width:767px){
-  .lightbox-gallery .photos {
-    padding-bottom: 20px
-  }
-
-  .lightbox-gallery .item {
-    padding-bottom: 30px
-  }
-}
-  </style>
+      }
+    </style>
     <!--START OF NAVIGATION BAR      START OF NAVIGATION BAR     START OF NAVIGATION BAR-->
     <nav class="navbar navbar-expand-md navbar-black bg-black">
-      <a href="index.php" class="navbar-brand">
+      <a href="{{ route('website.index') }}" class="navbar-brand">
           <img src="assets/images/logo-icon.png" height="60">&nbsp;AL Car Rental
       </a>
       <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -354,9 +65,9 @@
   
       <div class="collapse navbar-collapse" id="navbarCollapse">
           <div class="navbar-nav">
-              <a href="index.php" class="nav-item nav-link active">  HOME  </a>
-              <a href="car.html" class="nav-item nav-link">  OUR CAR  </a>
-              <a href="about.html" class="nav-item nav-link">  ABOUT  </a>
+              <a href="{{ route('website.index') }}" class="nav-item nav-link active">  HOME  </a>
+              <a href="{{ route('website.car') }}" class="nav-item nav-link">  OUR CAR  </a>
+              <a href="{{ route('website.about') }}" class="nav-item nav-link">  ABOUT  </a>
               <a href="testimonial.php" class="nav-item nav-link">  TESTIMONIAL  </a>
               <a href="cardelivery.php" class="nav-item nav-link">  CAR DELIVERY  </a>
               <a href="contact.php" class="nav-item nav-link">  CONTACT  </a>
@@ -393,32 +104,31 @@
           }
         }
       </style>
-<div class="about-section paddingTB60 gray-bg">
-                <div class="container">
-                    <div class="row">
-						<div class="col-md-7 col-sm-6">
+      <div class="about-section paddingTB60 gray-bg">
+        <div class="container">
+          <div class="row">
+						<div class="col-md-8 col-sm-6">
 							<div class="about-title clearfix">
 								<h1>About <span>Al Car Rental</span></h1>
 								<h3>Alhazril Gemilang Enterprise </h3>
 								<p class="about-paddingB">ALCar Rental owned by alhazril Gemilang Enterprise( ) is based in Johor Bahru. We provide car rental from all sorts of selections such as small cars, Sedans, SUVs, MPVs and 4x4. You can rely on us to provide you self-drive cars with affordable prices. Book your car early with us to guarantee the best car.</p><br>
                 <p class="about-paddingB">Al Car rental has been running the car rental business for 7 years. We provide car rentals for individuals and companies around West Malaysia. Our main corporate client includes Petronas Rapid Pengerang, Shell Malaysia and other oil and gas companies. We can also supply man power transfer from state to state by Hyundai Starex and buses.</p>
                 <div class="about-icons"> 
-                            <ul >
-                                <li><a href="https://www.facebook.com/profile.php?id=100013350733686"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a> </li>
-                              </ul>       
-	                     </div>
-						</div>
-					</div>
-						<div class="col-md-5 col-sm-6">
+                  <ul >
+                    <li><a href="https://www.facebook.com/profile.php?id=100013350733686"><i id="social-fb" class="fa fa-facebook-square fa-3x social"></i></a> </li>
+                  </ul>       
+                </div>
+						  </div>
+					  </div>
+						<div class="col-md-4 col-sm-6">
 							<div class="about-img">
-								<img src="image/logo.png" alt="">
+								<img src="assets/images/logo-icon.png" alt="">
 							</div>
 						</div>	
-                    </div>
-                </div>
-            </div>
+          </div>
+        </div>
+      </div>
         <!--END OF HEADER     END OF HEADER     END OF HEADER-->
-            <br>
         <!--START OF SERVICE    START OF SERVICE     START OF SERVICE-->
         <style>
             @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
@@ -563,12 +273,7 @@
 
         <!--START OF MAP     START OF MAP     START OF MAP-->
         <style>
-          h2{
-            color: white;
-          }
-          h5{
-            color: white;
-          }
+         
           @media (max-width: 990px){
             .container .row .col-md-8 iframe{
               max-width: 450px;
@@ -624,16 +329,16 @@
                   Car
                 </h6>
                 <p>
-                  <a href="car.html" class="text-reset">Regular</a>
+                  <a href="{{ route('website.car') }}" class="text-reset">Regular</a>
                 </p>
                 <p>
-                  <a href="car.html" class="text-reset">Sedan</a>
+                  <a href="{{ route('website.car') }}" class="text-reset">Sedan</a>
                 </p>
                 <p>
-                  <a href="car.html" class="text-reset">MPV</a>
+                  <a href="{{ route('website.car') }}" class="text-reset">MPV</a>
                 </p>
                 <p>
-                  <a href="car.html" class="text-reset">SUV</a>
+                  <a href="{{ route('website.car') }}" class="text-reset">SUV</a>
                 </p>
               </div>
               <!-- Grid column -->
@@ -645,13 +350,13 @@
                   Useful link
                 </h6>
                 <p>
-                  <a href="index.php" class="text-reset">Home</a>
+                  <a href="{{ route('website.index') }}" class="text-reset">Home</a>
                 </p>
                 <p>
-                  <a href="car.html" class="text-reset">Car Selection</a>
+                  <a href="{{ route('website.car') }}" class="text-reset">Car Selection</a>
                 </p>
                 <p>
-                  <a href="about.html" class="text-reset">About</a>
+                  <a href="{{ route('website.about') }}" class="text-reset">About</a>
                 </p>
                 <p>
                   <a href="contact.php" class="text-reset">Contact</a>

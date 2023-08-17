@@ -14,7 +14,13 @@
                     </ol>
                 </nav>
             </div>
-            
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <div class="button-table float-right">
+                        <a href="{{ route('booking.add') }}"><button type="button" class="btn btn-primary btn-rounded"><i class="lni lni-plus pb-1"></i> Add Past Record</button></a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="table-responsive">
             <table class="table stripe booking-datatable">

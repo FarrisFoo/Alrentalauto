@@ -86,6 +86,10 @@ Route::middleware(['web'])->group(function () {
         Route::get('/booking', [BookingController::class, 'index'])->name('booking.list');
         
         Route::get('/booking-listing', [BookingController::class, 'bookingListing'])->name('booking.listing');
+
+        Route::get('booking-add', [BookingController::class, 'addPastBooking'])->name('booking.add');
+
+        Route::post('/booking-add-process', [BookingController::class, 'addPastBookingPost'])->name('booking.add-post');
         
         Route::get('/booking-view/{id}', [BookingController::class, 'viewBooking'])->name('booking.view'); 
         

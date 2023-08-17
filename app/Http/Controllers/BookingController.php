@@ -564,4 +564,161 @@ class BookingController extends Controller
             'message' => 'Unable to fetch booking information.'
         ]);
     }
+
+    public function addPastBooking()
+    {
+        $carData = Car::get();
+
+        return view('admin.booking.create', compact('carData'));
+    }
+
+    public function addPastBookingPost(Request $request)
+    {
+        $rules = [
+            'renter_name' => 'required',
+            'renter_ic_front' => 'required',
+            'renter_ic_mid' => 'required',
+            'renter_ic_end' => 'required',
+            'renter_address' => 'required',
+            'renter_phone' => 'required',
+            'emergency_renter_phone' => 'required',
+            'renter_occupation' => 'required',
+            'company_name' => 'required_if:renter_occupation,==,2', //required only if renter occupation == worker(2)
+            'destination' => 'required',
+            'rental_car' => 'required',
+            'pickup_method' => 'required',
+            'pickup_area' => 'required_if:pickup_method,==,1', //required only if pick_up Method == delivery(1) 
+            'outside_area' => 'required_if:pickup_area,==,5', //required only if pickup_area == outside JB(5) 
+            'pickup_date' => 'required',
+            'pickup_time' => 'required',
+            'return_date' => 'required',
+            'return_time' => 'required',
+            'renter_ic' => 'required',
+            'renter_ic_back' => 'required',
+            'rental_license' => 'required',
+            'rental_license_back' => 'required',
+            'renter_selfie' => 'required'
+
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => false,
+                'error' => 'error',
+            ]);
+        }
+        
+        //make ic num
+        $formatted_ic = $request->renter_ic_front . '-' . $request->renter_ic_mid . '-' . $request->renter_ic_end;
+
+
+        $createNewCustomer = new Customer();
+        $createNewCustomer->name = $request->renter_name;
+        $createNewCustomer->ic_num = $formatted_ic;
+        $createNewCustomer->address = $request->renter_address;
+        $createNewCustomer->phone_num = $request->renter_phone;
+        $createNewCustomer->emergency_phone_num = $request->emergency_renter_phone;
+        $createNewCustomer->occupation = $request->renter_occupation;
+        $createNewCustomer->company_name = $request->company_name;
+        $createNewCustomer->save();
+
+        $createNewBooking = new Booking();
+        $createNewBooking->customer_id = $createNewCustomer->id;
+        $createNewBooking->car_id = $request->rental_car;
+        $createNewBooking->destination = $request->destination;
+        $createNewBooking->pickup_method = $request->pickup_method;
+        $createNewBooking->pickup_area = $request->pickup_area;
+        $createNewBooking->area_outside_jb = $request->outside_area;
+        $createNewBooking->pickup_date = $request->pickup_date;
+        $createNewBooking->pickup_time = $request->pickup_time;
+        $createNewBooking->return_date = $request->return_date;
+        $createNewBooking->return_time = $request->return_time;
+        $createNewBooking->renter_license = 1;
+        $createNewBooking->renter_ic = 1;
+        $createNewBooking->renter_selfie = 1;
+        $createNewBooking->total_price = $request->total_price;
+        $createNewBooking->status = 0;
+
+        if ($request->file('renter_ic')) {
+            $icFile = $request->file('renter_ic');
+            $icFilename = $createNewCustomer->id . '_ic' . $formatted_ic . '.' . $icFile->getClientOriginalExtension();
+
+            storage::put($this->bookingIcFilePath . $icFilename, file_get_contents($icFile));
+
+            // Upload file
+            $createNewBooking->renter_ic = $icFilename;
+        }
+
+        if ($request->file('renter_ic_back')) {
+            $icFile_back = $request->file('renter_ic_back');
+            $icFilename_back = $createNewCustomer->id . '_icback' . '.' . $icFile_back->getClientOriginalExtension();
+
+            storage::put($this->bookingIcFilePath . $icFilename_back, file_get_contents($icFile_back));
+
+            // Upload file
+            $createNewBooking->renter_ic_back = $icFilename_back;
+        }
+        
+        if ($request->file('rental_license')) {
+            $licenseFile = $request->file('rental_license');
+            $licenseFilename = $createNewCustomer->id . '_license' . '.' . $licenseFile->getClientOriginalExtension();
+
+            storage::put($this->bookingLicenseFilePath . $licenseFilename, file_get_contents($licenseFile));
+
+            // Upload file
+            $createNewBooking->renter_license = $licenseFilename;
+        }
+
+        if ($request->file('rental_license_back')) {
+            $licenseFile_back = $request->file('rental_license_back');
+            $licenseFilename_back = $createNewCustomer->id . '_licenseback' . '.' . $licenseFile_back->getClientOriginalExtension();
+
+            storage::put($this->bookingLicenseFilePath . $licenseFilename_back, file_get_contents($licenseFile_back));
+
+            // Upload file
+            $createNewBooking->renter_license_back = $licenseFilename_back;
+        }
+
+        if ($request->file('renter_selfie')) {
+            $selfieFile = $request->file('renter_selfie');
+            $selfieFilename = $createNewCustomer->id . '_selfie' . '.' . $selfieFile->getClientOriginalExtension();
+
+            storage::put($this->bookingSelfieFilePath . $selfieFilename, file_get_contents($selfieFile));
+
+            // Upload file
+            $createNewBooking->renter_selfie = $selfieFilename;
+        }
+         
+        $createNewBooking->save();
+
+        $bookingDetails = Booking::where('id', $createNewBooking->id)->with('customer')->first();
+
+        if($bookingDetails->renter_ic) {
+            $bookingDetails->renter_ic = asset($this->bookingIcStorageFilePath . $bookingDetails->renter_ic);
+        }
+
+        if($bookingDetails->renter_ic_back) {
+            $bookingDetails->renter_ic_back = asset($this->bookingIcStorageFilePath . $bookingDetails->renter_ic_back);
+        }
+
+        if($bookingDetails->renter_license) {
+            $bookingDetails->renter_license = asset($this->bookingLicenseStorageFilePath . $bookingDetails->renter_license);
+        }
+
+        if($bookingDetails->renter_license_back) {
+            $bookingDetails->renter_license_back = asset($this->bookingLicenseStorageFilePath . $bookingDetails->renter_license_back);
+        }
+
+        if($bookingDetails->renter_selfie) {
+            $bookingDetails->renter_selfie = asset($this->bookingSelfieStorageFilePath . $bookingDetails->renter_selfie);
+        }
+
+        // Mail::to('alcarrentalpasirgudang@gmail.com')->send(new BookingMail($bookingDetails));
+
+        return response()->json([
+            'status' => true,
+        ]);
+    }
 }

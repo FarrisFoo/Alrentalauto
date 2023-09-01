@@ -418,12 +418,21 @@ class BookingController extends Controller
                     return $pickupPlace;
                 })
                 ->editColumn('pickup_datetime', function($bookingData) {
-                    $formatted_pickup_datetime = Carbon::createFromFormat('Y-m-d', $bookingData->pickup_date)->format('d/m/Y') . ' at ' . $bookingData->pickup_time;
-
+                    $timeFormatCheckingPickUp = $bookingData->pickup_time;
+                    if(strpos($timeFormatCheckingPickUp, 'AM') !== false || strpos($timeFormatCheckingPickUp, 'PM') !== false) {
+                        $formatted_pickup_datetime = Carbon::createFromFormat('Y-m-d', $bookingData->pickup_date)->format('d/m/Y') . ' at ' . $bookingData->pickup_time;
+                    } else {
+                        $formatted_pickup_datetime = Carbon::createFromFormat('Y-m-d', $bookingData->pickup_date)->format('d/m/Y') . ' at ' . $bookingData->pickup_time . '00';
+                    }
                     return $formatted_pickup_datetime;
                 })
                 ->editColumn('return_datetime', function($bookingData) {
-                    $formatted_return_datetime = Carbon::createFromFormat('Y-m-d', $bookingData->return_date)->format('d/m/Y') . ' at ' . $bookingData->return_time;
+                    $timeFormatCheckingReturn = $bookingData->return_time;
+                    if(strpos($timeFormatCheckingReturn, 'AM') !== false || strpos($timeFormatCheckingReturn, 'PM') !== false) {
+                        $formatted_return_datetime = Carbon::createFromFormat('Y-m-d', $bookingData->return_date)->format('d/m/Y') . ' at ' . $bookingData->return_time;
+                    } else {
+                        $formatted_return_datetime = Carbon::createFromFormat('Y-m-d', $bookingData->return_date)->format('d/m/Y') . ' at ' . $bookingData->return_time . '00';
+                    }
 
                     return $formatted_return_datetime;
                 })

@@ -355,6 +355,7 @@
                                                     </tr>
                                                 </table>
                                             </div>
+                                            <p style="color: red;margin-top: 0;font-size:11px;">*Ini bukan jumlah akhir, sebarang kos tambahan seperti masa tambahan/lain-lain boleh dirunding antara pelanggan dan pembekal.</p>
 
                                             <div class="col-12">
 												<input type="hidden" class="form-control" id="total_price" name="total_price" value="">

@@ -19,6 +19,7 @@
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<link href="assets/css/bootstrap-extended.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="assets/css/app.css" rel="stylesheet">
 	<link href="assets/css/icons.css" rel="stylesheet">
 	<title>Alrentalauto | Booking</title>
@@ -105,28 +106,34 @@
 											<div class="col-12">
 												<label for="renter_name" class="form-label">Nama</label>
 												<input type="text" class="form-control" id="renter_name" name="renter_name">
+                                                <p id="name-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan nama anda</p>
 											</div>
 
                                             <label for="renter_name" class="form-label">Kad Pengenalan</label>
                                             <div class="input-group" style="margin-top:0;">
-                                                <input type="text" class="form-control" placeholder="991231" id="renter_ic_front" name="renter_ic_front"> <span class="input-group-text">-</span>
-                                                <input type="text" class="form-control" placeholder="00" id="renter_ic_mid" name="renter_ic_mid"> <span class="input-group-text">-</span>
-                                                <input type="text" class="form-control" placeholder="1111" id="renter_ic_end" name="renter_ic_end">
+                                                <input type="text" class="form-control" id="renter_ic_front" name="renter_ic_front"> <span class="input-group-text">-</span>
+                                                <input type="text" class="form-control" id="renter_ic_mid" name="renter_ic_mid"> <span class="input-group-text">-</span>
+                                                <input type="text" class="form-control" id="renter_ic_end" name="renter_ic_end">
                                             </div>
+                                            <p id="ic-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan numbor kad pengenalan anda</p>
+
 
 											<div class="col-12">
 												<label for="renter_address" class="form-label">Alamat</label>
 												<textarea class="form-control" aria-label="With textarea" id="renter_address" name="renter_address"></textarea>
-											</div>
+                                                <p id="address-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan alamat rumah anda</p>
+                                            </div>
 
                                             <div class="col-12">
 												<label for="renter_phone" class="form-label">No Telefon</label>
-												<input type="text" class="form-control" id="renter_phone" name="renter_phone" placeholder="011-00000000">
-											</div>
+												<input type="text" class="form-control" id="renter_phone" name="renter_phone">
+                                                <p id="phone-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan numbor telephone anda</p>
+                                            </div>
 
                                             <div class="col-12">
 												<label for="emergency_renter_phone" class="form-label">No Telefon Kecemasan</label>
-												<input type="text" class="form-control" id="emergency_renter_phone" name="emergency_renter_phone" placeholder="011-00000000">
+												<input type="text" class="form-control" id="emergency_renter_phone" name="emergency_renter_phone">
+                                                <p id="ephone-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan numbor telephone kecemasan anda</p>
 											</div>
 
                                             <div class="login-separater text-center mb-4"> <span>KETERANGAN PENYEWA</span>
@@ -135,23 +142,26 @@
 
 											<div class="col-12">
 												<label for="renter_occupation" class="form-label">Pekerjaan</label>
-												<select class="form-select mb-3" id="renter_occupation" name="renter_occupation" aria-label="Default select example">
-                                                    <option selected disabled>Pilihan Status</option>
+												<select class="form-select" id="renter_occupation" name="renter_occupation" aria-label="Default select example">
+                                                    <option selected value="" style="color: gray">Pilihan Status</option>
                                                     <option value="1">Pelajar</option>
                                                     <option value="2">Pekerja</option>
                                                     <option value="3">Berniaga Sendiri</option>
                                                     <option value="4">Sura/Suri Rumah</option>
                                                 </select>
+                                                <p id="occupation-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih pekerjaan anda</p>
 											</div>
 
                                             <div class="col-12 d-none" id="company_name_div">
 												<label for="company_name" class="form-label">Nama Syarikat</label>
-												<input type="text" class="form-control" id="company_name" name="company_name" placeholder="Al Rental Auto">
+												<input type="text" class="form-control" id="company_name" name="company_name">
+                                                <p id="company-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila lengkapkan nama syarikat pekerjaan anda</p>
 											</div>
 
                                             <div class="col-12">
 												<label for="destination" class="form-label">Destinasi Dituju</label>
-												<input type="text" class="form-control" id="destination" name="destination" placeholder="Pasir Gudang">
+												<input type="text" class="form-control" id="destination" name="destination">
+                                                <p id="destination-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan destinasi dituju anda</p>
 											</div>
 
                                             <div class="login-separater text-center mb-4"> <span>KETERANGAN SEWAAN</span>
@@ -160,27 +170,29 @@
 
                                             <div class="col-12">
 												<label for="rental_car" class="form-label">Kereta Disewa</label>
-												<select class="form-select mb-3" id="rental_car" name="rental_car">
-                                                    <option selected disabled>Pilihan Kereta</option>
+												<select class="form-select" id="rental_car" name="rental_car">
+                                                    <option selected value="" style="color: gray">Pilihan Kereta</option>
                                                     @foreach ($carData as $car)
                                                         <option value="{{ $car->id }}" data-car-model="{{ $car->model }}" data-car-price="{{ $car->price }}">{{ $car->model }} | RM{{ $car->price }}</option>
                                                     @endforeach
                                                 </select>
+                                                <p id="car-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih kereta sewaan anda</p>
 											</div>
 
                                             <div class="col-12">
 												<label for="pickup_method" class="form-label">Cara Pengambilan</label>
-												<select class="form-select mb-3" id="pickup_method" name="pickup_method" aria-label="Default select example">
-                                                    <option selected disabled>Pilihan Tempat Mengambil Kenderaan</option>
+												<select class="form-select" id="pickup_method" name="pickup_method" aria-label="Default select example">
+                                                    <option selected value="" style="color: gray">Pilihan Tempat Mengambil Kenderaan</option>
                                                     <option value="0">Ambil di Pejabat Al Car Rental</option>
                                                     <option value="1">Penghantaran</option>
                                                 </select>
+                                                <p id="pickup-method-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih cara pengambilan anda</p>
 											</div>
 
                                             <div class="col-12 d-none" id="pickup_area_div">
                                                 <label for="pickup_area" class="form-label">Lokasi Pengambilan</label>
-                                                <select class="form-select mb-3" id="pickup_area" name="pickup_area" aria-label="Default select example">
-                                                    <option selected disabled>Pilih Lokasi</option>
+                                                <select class="form-select" id="pickup_area" name="pickup_area" aria-label="Default select example">
+                                                    <option selected value="" style="color: gray">Pilih Lokasi</option>
                                                     <option value="1">RM15 | Pasir Gudang</option>
                                                     <option value="2">RM20 | Permas</option>
                                                     <option value="3">RM30 | Johor Bahru</option>
@@ -188,22 +200,25 @@
                                                     <option value="6">RM60 | Lapangan Terbang Senai</option>
                                                     <option value="5">RM50 | Kawasan luar Johor Bahru (exp: Gelang Patah, Iskandar, Senai)</option>
                                                 </select>
+                                                <p id="pickup-area-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih lokasi pengambilan anda</p>
                                             </div>
 
                                             <div class="col-12 d-none" id="outside_area_div">
 												<label for="outside_area" class="form-label">Lokasi Pengambilan (Luar Johor Bahru)</label>
 												<input type="text" class="form-control" id="outside_area" name="outside_area" placeholder="Gelang Patah">
+                                                <p id="outside-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan lokasi pengambilan sekiranya luar kawasan</p>
 											</div>
 
                                             <div class="mb-3">
                                                 <label for="pickup_date" class="form-label">Tarikh Pengambilan:</label>
                                                 <input type="date" id="pickup_date" name="pickup_date" class="form-control" min="{{ $minimumDatePickUp }}">
+                                                <p id="pickup-date-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih tarikh pengambilan sewaan anda</p>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="pickup_time" class="form-label">Masa Pengambilan</label>
-                                                <select class="form-select mb-3" id="pickup_time" name="pickup_time" aria-label="Default select example">
-                                                    <option selected disabled>Pilih Masa Pengambilan</option>
+                                                <select class="form-select" id="pickup_time" name="pickup_time" aria-label="Default select example">
+                                                    <option selected value="" style="color: gray">Pilih Masa Pengambilan</option>
                                                     <option value="7:00 AM">7:00 AM</option>
                                                     <option value="8:00 AM">8:00 AM</option>
                                                     <option value="9:00 AM">9:00 AM</option>
@@ -222,17 +237,19 @@
                                                     <option value="10:00 PM">10:00 PM</option>
                                                     <option value="11:00 PM">11:00 PM</option>
                                                 </select>
+                                                <p id="pickup-time-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih masa pengambilan sewaan anda</p>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="return_date" class="form-label">Tarikh Pemulangan:</label>
                                                 <input type="date" id="return_date" name="return_date" class="form-control" min="{{ $minimumDateReturn }}">
+                                                <p id="return-date-errormsg" class="d-none" style="color: red"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih tarikh pemulangan sewaan anda</p>
                                             </div>
 
                                             <div class="col-12">
                                                 <label for="return_time" class="form-label">Masa Pemulangan</label>
-                                                <select class="form-select mb-3" id="return_time" name="return_time" aria-label="Default select example">
-                                                    <option selected disabled>Pilih Masa Pemulangan</option>
+                                                <select class="form-select" id="return_time" name="return_time" aria-label="Default select example">
+                                                    <option selected value="" style="color: gray">Pilih Masa Pemulangan</option>
                                                     <option value="7:00 AM">7:00 AM</option>
                                                     <option value="8:00 AM">8:00 AM</option>
                                                     <option value="9:00 AM">9:00 AM</option>
@@ -251,6 +268,7 @@
                                                     <option value="10:00 PM">10:00 PM</option>
                                                     <option value="11:00 PM">11:00 PM</option>
                                                 </select>
+                                                <p id="return-time-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih masa pemulangan sewaan anda</p>
                                             </div>
 
                                             <div class="login-separater text-center"> <span>PENGESAHAN IDENTITI</span>
@@ -262,26 +280,33 @@
                                             <div class="input-group control-group mt-0">
                                                 <input type="file" accept="image/*" name="renter_ic" class="form-control">
                                             </div>
+                                            <p id="renter-ic-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan gambar hadapan kad pengenalan anda</p>
+
                                             <p class="mb-0">Belakang</p>
-                                            <div class="input-group control-group mt-0 mb-4">
+                                            <div class="input-group control-group mt-0">
                                                 <input type="file" accept="image/*" name="renter_ic_back" class="form-control">
                                             </div>
+                                            <p id="renter-ic-back-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan gambar belakang kad pengenalan anda</p>
 
                                             <h5 for="renter_license mb-1" class="form-label">Lesen Kenderaan</h5>
                                             <p class="mb-0">Depan</p>
                                             <div class="input-group mt-0 control-group">
                                                 <input type="file" accept="image/*" name="rental_license" class="form-control">
                                             </div>
+                                            <p id="renter-license-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan gambar hadapan lesen kenderaan anda</p>
+
                                             <p class="mb-0">Belakang</p>
-                                            <div class="input-group mt-0 control-group mb-4">
+                                            <div class="input-group mt-0 control-group">
                                                 <input type="file" accept="image/*" name="rental_license_back" class="form-control">
                                             </div>
+                                            <p id="renter-license-back-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan gambar belakang lesen kenderaan anda</p>
 
                                             <h5 for="renter_selfie mb-1" class="form-label">Selfie bersama Lesen Kenderaan</h5>
                                             <p class="mb-0"></p>
                                             <div class="input-group mt-0 control-group">
                                                 <input type="file" accept="image/*" name="renter_selfie" class="form-control">
                                             </div>
+                                            <p id="renter-selfie-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan gambar selfie bersama lesen kenderaan anda</p>
 
                                             <div class="login-separater text-center"> <span>KIRAAN TEMPAHAN</span>
                                                 <hr/>
@@ -307,6 +332,11 @@
                                                         <td class="col-4">Tempoh</td>
                                                         <td class="col-4 set-duration"></td>
                                                         <td class="col-4"></td>
+                                                    </tr>
+                                                    <tr class="col-4 d-none" id="add_additional_time">
+                                                        <td class="col-4">Tambahan Masa</td>
+                                                        <td class="col-4 addon-time"></td>
+                                                        <td class="col-4 addon-cost"></td>
                                                     </tr>
                                                     <tr class="col-4 d-none" id="delivery_calculation">
                                                         <td class="col-4">Caj Penghantaran</td>
@@ -385,6 +415,15 @@
     <script src="sweetalert2.all.min.js"></script>
 
 	<script>
+        document.addEventListener("DOMContentLoaded", function() {
+
+            Swal.fire({
+            position: 'top',
+            html: '<i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pastikan browser anda telah dikemaskini kepada versi terkini<br><br>Browser versi terkini dapat membantu pelanggan menggunakan laman web ini dengan lebih baik 😃🌟',
+            showConfirmButton: false 
+            });
+        });
+
         // pre-loader
         function showLoading() {
             // create the pre-loader element
@@ -411,6 +450,8 @@
         var deliveryCharge = 0;
         var totalCarPrice = 0;
         var totalDuration = 0;
+        var additionalTimePeriod = 0;
+        var additionalTimeCost = 0;
 
         $(document).on('change', '#renter_occupation', function () {
             if($('#renter_occupation').val() == 2){
@@ -441,6 +482,30 @@
                 $('#delivery_calculation').removeClass('d-none');
             } else {
                 $('#delivery_calculation').addClass('d-none');
+            }
+        });
+
+        $(document).on('change', '#pickup_time', function () {
+            var pickupTime = parseInt($('#pickup_time').val());
+            var returnTime = parseInt($('#return_time').val());
+
+            if(pickupTime < returnTime){
+                $('#add_additional_time').removeClass('d-none');
+            }else {
+                $('#add_additional_time').addClass('d-none');
+                additionalTimeCost = 0;
+            }
+        });
+
+        $(document).on('change', '#return_time', function () {
+            var pickupTime = parseInt($('#pickup_time').val());
+            var returnTime = parseInt($('#return_time').val());
+
+            if(pickupTime < returnTime){
+                $('#add_additional_time').removeClass('d-none');
+            }else {
+                $('#add_additional_time').addClass('d-none');
+                additionalTimeCost = 0;
             }
         });
 
@@ -504,6 +569,19 @@
                 durationAndPrice();
             });
 
+            $(document).on('change', '#pickup_time', function () {
+                calculationTime();
+
+                durationAndPrice();
+            });
+
+
+            $(document).on('change', '#return_time', function () {
+                calculationTime();
+
+                durationAndPrice();
+            });
+
             $(document).on('change', '#rental_car', function () {
                 // Get the car model and price.
                 carModel = $(this).find(':selected').attr('data-car-model')
@@ -519,9 +597,22 @@
         });
 
         function durationAndPrice() {
-            $('.set-duration').html(totalDuration + ' Day(s)');
-            $('.set-duration-price').html('RM' + ((totalDuration * carPrice) + deliveryCharge + 100));
-            $('#total_price').val((totalDuration * carPrice) + deliveryCharge);
+            $('.addon-time').html(additionalTimePeriod + ' Jam');
+            $('.addon-cost').html('RM' + additionalTimeCost);
+            $('.set-duration').html(totalDuration + ' Hari');
+            $('.set-duration-price').html('RM' + ((totalDuration * carPrice) + deliveryCharge + 100 + additionalTimeCost));
+            
+            $('#total_price').val((totalDuration * carPrice) + deliveryCharge + additionalTimeCost);
+        }
+         
+        function calculationTime() {
+            var pickupTime = parseInt($('#pickup_time').val());
+            var returnTime = parseInt($('#return_time').val());
+
+            if(pickupTime < returnTime){
+                additionalTimePeriod = returnTime - pickupTime;
+                additionalTimeCost = additionalTimePeriod * 10;
+            }
         }
 
         function calculationDuration() {
@@ -578,6 +669,131 @@
             formData.append('renter_selfie', $('input[name="renter_selfie"]')[0].files[0]);
 
             formData.append('tnc_check', $('input[name="tnc-check"]').val());
+
+            if ($('input[name="renter_name"]').val() == ''){
+                $('#name-errormsg').removeClass('d-none');
+            } else {
+                $('#name-errormsg').addClass('d-none');
+            }
+
+            if (($('input[name="renter_ic_front"]').val() == '') || ($('input[name="renter_ic_mid"]').val() == '') || ($('input[name="renter_ic_end"]').val() == '')){
+                $('#ic-errormsg').removeClass('d-none');
+            }else {
+                $('#ic-errormsg').addClass('d-none');
+            }
+
+            if ($('textarea[name="renter_address"]').val() == ''){
+                $('#address-errormsg').removeClass('d-none');
+            } else {
+                $('#address-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="renter_phone"]').val() == ''){
+                $('#phone-errormsg').removeClass('d-none');
+            } else {
+                $('#phone-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="emergency_renter_phone"]').val() == ''){
+                $('#ephone-errormsg').removeClass('d-none');
+            } else {
+                $('#ephone-errormsg').addClass('d-none');
+            }
+
+            if ($('select[name="renter_occupation"]').val() === ""){
+                $('#occupation-errormsg').removeClass('d-none');
+            } else {
+                $('#occupation-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="company_name"]').val() == ''){
+                $('#company-errormsg').removeClass('d-none');
+            } else {
+                $('#company-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="destination"]').val() == ''){
+                $('#destination-errormsg').removeClass('d-none');
+            } else {
+                $('#destination-errormsg').addClass('d-none');
+            }
+            if ($('select[name="rental_car"]').val() === ""){
+                $('#car-errormsg').removeClass('d-none');
+            } else {
+                $('#car-errormsg').addClass('d-none');
+            }
+
+            if ($('select[name="pickup_method"]').val() === ""){
+                $('#pickup-method-errormsg').removeClass('d-none');
+            } else {
+                $('#pickup-method-errormsg').addClass('d-none');
+            }
+
+            if ($('select[name="pickup_area"]').val() === ""){
+                $('#pickup-area-errormsg').removeClass('d-none');
+            } else {
+                $('#pickup-area-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="outside_area"]').val() == ''){
+                $('#outside-errormsg').removeClass('d-none');
+            } else {
+                $('#outside-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="pickup_date"]').val() == ''){
+                $('#pickup-date-errormsg').removeClass('d-none');
+            } else {
+                $('#pickup-date-errormsg').addClass('d-none');
+            }
+
+            if ($('select[name="pickup_time"]').val() === ""){
+                $('#pickup-time-errormsg').removeClass('d-none');
+            } else {
+                $('#pickup-time-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="return_date"]').val() == ''){
+                $('#return-date-errormsg').removeClass('d-none');
+            } else {
+                $('#return-date-errormsg').addClass('d-none');
+            }
+
+            if ($('select[name="return_time"]').val() === ""){
+                $('#return-time-errormsg').removeClass('d-none');
+            } else {
+                $('#return-time-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="renter_ic"]')[0].files[0] == null){
+                $('#renter-ic-errormsg').removeClass('d-none');
+            } else {
+                $('#renter-ic-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="renter_ic_back"]')[0].files[0] == null){
+                $('#renter-ic-back-errormsg').removeClass('d-none');
+            } else {
+                $('#renter-ic-back-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="rental_license"]')[0].files[0] == null){
+                $('#renter-license-errormsg').removeClass('d-none');
+            } else {
+                $('#renter-license-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="rental_license_back"]')[0].files[0] == null){
+                $('#renter-license-back-errormsg').removeClass('d-none');
+            } else {
+                $('#renter-license-back-errormsg').addClass('d-none');
+            }
+
+            if ($('input[name="renter_selfie"]')[0].files[0] == null){
+                $('#renter-selfie-errormsg').removeClass('d-none');
+            } else {
+                $('#renter-selfie-errormsg').addClass('d-none');
+            }
 
             if ($('input[name="tnc-check"]').val() != '1') {
                 closeLoading();

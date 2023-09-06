@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use GuzzleHttp;
 use Carbon\Carbon;
 use App\Models\Car;
@@ -730,5 +731,83 @@ class BookingController extends Controller
         return response()->json([
             'status' => true,
         ]);
+    }
+
+    public function generateBookingPDF(Request $request)
+    {
+        $bookingData = Booking::where('id', $request->id)->with(['car', 'customer'])->first();
+
+        if ($bookingData->pickup_method == 0) {
+            $pickupPlace = 'Pickup at our office';
+        } else{
+            if ($bookingData->pickup_area == 1) {
+                $pickupPlace = 'Deliver to Pasir Gudang';
+            } else if ($bookingData->pickup_area == 2) {
+                $pickupPlace = 'Deliver to Permas';
+            } else if ($bookingData->pickup_area == 3) {
+                $pickupPlace = 'Deliver to Johor Bahru';
+            } else if ($bookingData->pickup_area == 4) {
+                $pickupPlace = 'Deliver to Larkin';
+            } else if ($bookingData->pickup_area == 5) {
+                $pickupPlace = 'Deliver to ' . ucfirst($bookingData->area_outside_jb);
+            }else {
+                $pickupPlace = 'Error : User Not Selecting pickup_area';
+            }
+        }
+
+        //reformat pickup Date
+        $formatted_pickup_date = Carbon::createFromFormat('Y-m-d', $bookingData->pickup_date)->format('d F Y');
+        //reformat return Date
+        $formatted_return_date = Carbon::createFromFormat('Y-m-d', $bookingData->return_date)->format('d F Y');
+
+        //get total booking day
+        $totalBookingDays = Carbon::createFromFormat('Y-m-d', $bookingData->pickup_date)->diffInDays(Carbon::createFromFormat('Y-m-d', $bookingData->return_date));
+
+         //calculate total rental
+         $rentTotal = 0;
+         $rentTotal = $bookingData->car->price * $totalBookingDays;
+ 
+         //get delivery fee
+         $delivery_fee = 0;
+         if($bookingData->pickup_method == 1) {
+             if($bookingData->pickup_area == 1) {
+                 $delivery_fee = 15;
+             } else if ($bookingData->pickup_area == 2) {
+                 $delivery_fee = 20;
+             } else if ($bookingData->pickup_area == 3) {
+                 $delivery_fee = 30;
+             } else if ($bookingData->pickup_area == 4) {
+                 $delivery_fee = 30;
+             } else if ($bookingData->pickup_area == 5) {
+                 $delivery_fee = 50;
+             } else {
+                 $delivery_fee = 0;
+             }
+         }
+ 
+         //deposit value
+         $deposit = 100;
+ 
+         //calculate overall total
+         $overallTotal = $deposit + $rentTotal + $delivery_fee;
+
+        $data = [
+            'title' => 'Welcome to ItSolutionStuff.com',
+            'date' => date('m/d/Y'),
+            'bookingData' => $bookingData,
+            'totalBookingDays' => $totalBookingDays,
+            'rentTotal' => $rentTotal,
+            'delivery_fee' => $delivery_fee,
+            'deposit' => $deposit,
+            'overallTotal' => $overallTotal,
+            'pickupPlace' => $pickupPlace,
+        ];
+          
+        $pdf = PDF::loadView('admin.booking.booking-pdf', $data);
+
+        return $pdf->download('AlcarRental_BookingInvoice_'. $bookingData->id .'.pdf');
+        
+        
+        // return view('admin.booking.booking-pdf', compact('bookingData'));
     }
 }

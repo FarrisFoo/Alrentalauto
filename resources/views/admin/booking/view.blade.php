@@ -13,6 +13,13 @@
                         </ol>
                     </nav>
                 </div>
+                <div class="ms-auto">
+                    <div class="btn-group">
+                        <div class="button-table float-right">
+                            <a href="{{ route('booking.generate-pdf', $bookingData->id) }}"><button type="button" class="btn btn-primary btn-rounded">Generate Invoice</button></a>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--end breadcrumb-->
             <div class="row">

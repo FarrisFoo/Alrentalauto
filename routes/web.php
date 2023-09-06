@@ -94,6 +94,8 @@ Route::middleware(['web'])->group(function () {
         Route::get('/booking-view/{id}', [BookingController::class, 'viewBooking'])->name('booking.view'); 
         
         Route::post('/update-status', [BookingController::class, 'changeStatus'])->name('booking.change-status');
+
+        Route::get('/generate-pdf/{id}', [BookingController::class, 'generateBookingPDF'])->name('booking.generate-pdf');
         
         //car middleware
         Route::get('/car', [CarController::class, 'index'])->name('car.list');
@@ -109,6 +111,11 @@ Route::middleware(['web'])->group(function () {
         Route::get('/customer', [CustomerController::class, 'index'])->name('customer.list');
         
         Route::get('/customer-listing', [CustomerController::class, 'customerListing'])->name('customer.listing');
+
+        //quotation middleware
+        Route::get('/quotation', [QuotationController::class, 'index'])->name('quotation.list');
+        
+        Route::get('/quotation-listing', [QuotationController::class, 'quotationListing'])->name('quotation.listing');
     });
 
 });

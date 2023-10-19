@@ -57,6 +57,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('admin.user-management.listing') }}">
+                        <div class="parent-icon"><i class='lni lni-users'></i>
+                        </div>
+                        <div class="menu-title">Quotation Maker</div>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('booking-form') }}">
                         <div class="parent-icon"><i class='lni lni-write'></i>
                         </div>

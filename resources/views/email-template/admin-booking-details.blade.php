@@ -162,7 +162,7 @@
                                                                 Pickup Time
                                                             </td>
                                                             <td style="padding-left: 10px;padding-right:10px;">
-                                                               {{ $bookingDetails->pickup_time }}
+                                                               {{ $formatted_pickup_time }}
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -196,7 +196,7 @@
                                                                 Return Time
                                                             </td>
                                                             <td style="padding-left: 10px;padding-right:10px;">
-                                                               {{ $bookingDetails->return_time }}
+                                                               {{ $formatted_return_time }}
                                                             </td>
                                                         </tr>
                                                     </table>

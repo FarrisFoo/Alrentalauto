@@ -36,7 +36,17 @@ class BookingMail extends Mailable
         //reformat return Date
         $formatted_return_date = Carbon::createFromFormat('Y-m-d', $bookingDetails->return_date)->format('d F Y');
 
+        $originalPickupTime = $bookingDetails->pickup_time;
+        $originalReturnTime = $bookingDetails->return_time;
+        
+        $changedPickupTime = Carbon::createFromTime($originalPickupTime, 0, 0);
+        $changedReturnTime = Carbon::createFromTime($originalReturnTime, 0, 0);
+
+        $formatted_pickup_time = $changedPickupTime->format('h A');
+        $formatted_return_time = $changedReturnTime->format('h A');
+        
+
         return $this->subject('AlCarRental - '. $bookingDetails->customer->name .' Booking Details')
-            ->view('email-template.admin-booking-details', compact('bookingDetails', 'formatted_pickup_date' , 'formatted_return_date'));
+            ->view('email-template.admin-booking-details', compact('bookingDetails', 'formatted_pickup_date' , 'formatted_return_date', 'formatted_pickup_time', 'formatted_return_time'));
     }
 }

@@ -117,7 +117,7 @@
                                             </div>
                                             <p id="ic-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila masukkan numbor kad pengenalan anda</p>
 
-
+ 
 											<div class="col-12">
 												<label for="renter_address" class="form-label">Alamat</label>
 												<textarea class="form-control" aria-label="With textarea" id="renter_address" name="renter_address"></textarea>
@@ -219,23 +219,23 @@
                                                 <label for="pickup_time" class="form-label">Masa Pengambilan</label>
                                                 <select class="form-select" id="pickup_time" name="pickup_time" aria-label="Default select example">
                                                     <option selected value="" style="color: gray">Pilih Masa Pengambilan</option>
-                                                    <option value="7:00 AM">7:00 AM</option>
-                                                    <option value="8:00 AM">8:00 AM</option>
-                                                    <option value="9:00 AM">9:00 AM</option>
-                                                    <option value="10:00 AM">10:00 AM</option>
-                                                    <option value="11:00 AM">11:00 AM</option>
-                                                    <option value="12:00 PM">12:00 PM</option>
-                                                    <option value="1:00 PM">1:00 PM</option>
-                                                    <option value="2:00 PM">2:00 PM</option>
-                                                    <option value="3:00 PM">3:00 PM</option>
-                                                    <option value="4:00 PM">4:00 PM</option>
-                                                    <option value="5:00 PM">5:00 PM</option>
-                                                    <option value="6:00 PM">6:00 PM</option>
-                                                    <option value="7:00 PM">7:00 PM</option>
-                                                    <option value="7:00 PM">8:00 PM</option>
-                                                    <option value="9:00 PM">9:00 PM</option>
-                                                    <option value="10:00 PM">10:00 PM</option>
-                                                    <option value="11:00 PM">11:00 PM</option>
+                                                    <option value="7">7:00 AM</option>
+                                                    <option value="8">8:00 AM</option>
+                                                    <option value="9">9:00 AM</option>
+                                                    <option value="10">10:00 AM</option>
+                                                    <option value="11">11:00 AM</option>
+                                                    <option value="12">12:00 PM</option>
+                                                    <option value="13">1:00 PM</option>
+                                                    <option value="14">2:00 PM</option>
+                                                    <option value="15">3:00 PM</option>
+                                                    <option value="16">4:00 PM</option>
+                                                    <option value="17">5:00 PM</option>
+                                                    <option value="18">6:00 PM</option>
+                                                    <option value="19">7:00 PM</option>
+                                                    <option value="20">8:00 PM</option>
+                                                    <option value="21">9:00 PM</option>
+                                                    <option value="22">10:00 PM</option>
+                                                    <option value="23">11:00 PM</option>
                                                 </select>
                                                 <p id="pickup-time-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih masa pengambilan sewaan anda</p>
                                             </div>
@@ -250,23 +250,23 @@
                                                 <label for="return_time" class="form-label">Masa Pemulangan</label>
                                                 <select class="form-select" id="return_time" name="return_time" aria-label="Default select example">
                                                     <option selected value="" style="color: gray">Pilih Masa Pemulangan</option>
-                                                    <option value="7:00 AM">7:00 AM</option>
-                                                    <option value="8:00 AM">8:00 AM</option>
-                                                    <option value="9:00 AM">9:00 AM</option>
-                                                    <option value="10:00 AM">10:00 AM</option>
-                                                    <option value="11:00 AM">11:00 AM</option>
-                                                    <option value="12:00 PM">12:00 PM</option>
-                                                    <option value="1:00 PM">1:00 PM</option>
-                                                    <option value="2:00 PM">2:00 PM</option>
-                                                    <option value="3:00 PM">3:00 PM</option>
-                                                    <option value="4:00 PM">4:00 PM</option>
-                                                    <option value="5:00 PM">5:00 PM</option>
-                                                    <option value="6:00 PM">6:00 PM</option>
-                                                    <option value="7:00 PM">7:00 PM</option>
-                                                    <option value="7:00 PM">8:00 PM</option>
-                                                    <option value="9:00 PM">9:00 PM</option>
-                                                    <option value="10:00 PM">10:00 PM</option>
-                                                    <option value="11:00 PM">11:00 PM</option>
+                                                    <option value="7">7:00 AM</option>
+                                                    <option value="8">8:00 AM</option>
+                                                    <option value="9">9:00 AM</option>
+                                                    <option value="10">10:00 AM</option>
+                                                    <option value="11">11:00 AM</option>
+                                                    <option value="12">12:00 PM</option>
+                                                    <option value="13">1:00 PM</option>
+                                                    <option value="14">2:00 PM</option>
+                                                    <option value="15">3:00 PM</option>
+                                                    <option value="16">4:00 PM</option>
+                                                    <option value="17">5:00 PM</option>
+                                                    <option value="18">6:00 PM</option>
+                                                    <option value="19">7:00 PM</option>
+                                                    <option value="20">8:00 PM</option>
+                                                    <option value="21">9:00 PM</option>
+                                                    <option value="22">10:00 PM</option>
+                                                    <option value="23">11:00 PM</option>
                                                 </select>
                                                 <p id="return-time-errormsg" class="d-none" style="color: red;margin-top: 0"><i class="fa fa-exclamation-circle" style="color:red;padding-right:5px"></i>Sila pilih masa pemulangan sewaan anda</p>
                                             </div>
